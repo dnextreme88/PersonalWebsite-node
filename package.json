@@ -1,0 +1,47 @@
+{
+  "name": "PersonalWebsite-node",
+  "version": "1.0.0",
+  "description": "Personal website under NodeJs backend",
+  "main": "bin/www",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "nodemon bin/www | bunyan",
+    "lint": "npx eslint . --ignore-pattern node_modules/",
+    "migrate": "npx sequelize db:migrate && echo \"DONT FORGET TO UPDATE YOUR MODELS\"",
+    "seed": "npx sequelize db:seed:all && echo \"SEEDING TO YOUR MODELS\"",
+    "seed:undo": "npx sequelize db:seed:undo:all && echo \"UNDOING SEEDS OF MODELS\"",
+    "test": "npx mocha --exit --recursive test/"
+  },
+  "author": "Kevin Decena",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bunyan": "^1.8.15",
+    "compression": "^1.7.4",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "http-errors": "^1.8.0",
+    "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "multer": "^1.4.3",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.0",
+    "mocha": "^9.0.3",
+    "nodemon": "^2.0.12"
+  }
+}
