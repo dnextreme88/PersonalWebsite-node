@@ -16,22 +16,18 @@ class Helpers {
         };
     }
 
-    // addErrorMessages(field) {
-    //     const suffix = 'not found';
-    //     let errorMessage;
+    addErrorMessage(field) {
+        const suffix = 'not found';
+        let errorMessage;
 
-    //     if (field === 'CustomerId') {
-    //         errorMessage = `Customer id ${suffix}`;
-    //     } else if (field === 'DsTypeId') {
-    //         errorMessage = `Ds type id ${suffix}`;
-    //     } else if (field === 'UserId') {
-    //         errorMessage = `User id ${suffix}`;
-    //     } else if (field === 'UserTypeId') {
-    //         errorMessage = `User type id ${suffix}`;
-    //     }
+        if (field === 'categoryId') {
+            errorMessage = `Category id ${suffix}`;
+        } else if (field === 'userId') {
+            errorMessage = `User id ${suffix}`;
+        }
 
-    //     return errorMessage;
-    // }
+        return errorMessage;
+    }
 }
 
 module.exports = Helpers;

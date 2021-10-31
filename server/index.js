@@ -4,9 +4,8 @@ const compression = require('compression');
 const httpErrors = require('http-errors');
 const routes = require('./routes');
 
-// Modules (files) are cached in node: so any subsequent require('./models') (like in the services)
-// will just call the existing Class instantiated here
-// const db = require('./models');
+const CategoryService = require('./services/CategoryService');
+const PostService = require('./services/PostService');
 const UserService = require('./services/UserService');
 
 module.exports = (config) => {
@@ -17,6 +16,9 @@ module.exports = (config) => {
 
     // Services
     const users = new UserService(log);
+    // -- Blog
+    const categories = new CategoryService(log);
+    const posts = new PostService(log);
 
     app.get('/favicon.ico', (req, res) => res.sendStatus(204));
     app.get('/', (request, response) => response.send('Hello world!'));
@@ -35,6 +37,8 @@ module.exports = (config) => {
     }
 
     app.use('/api/', routes({
+        categories,
+        posts,
         users,
     }));
 
