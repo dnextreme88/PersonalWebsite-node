@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 const httpErrors = require('http-errors');
@@ -16,6 +17,14 @@ module.exports = (config) => {
     app.use(helmet());
     app.use(compression());
     const log = config.log();
+
+    // So that the frontend framework can send axios requests to the backend
+    const corsOptions = {
+        origin: '*',
+        credentials: true, // access-control-allow-credentials:true
+        optionSuccessStatus: 200,
+    };
+    app.use(cors(corsOptions));
 
     // Services
     const users = new UserService(log);
