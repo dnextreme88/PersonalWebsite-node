@@ -44,18 +44,13 @@ module.exports = (params) => {
         try {
             const newUser = await users.createUser(request.body);
 
-            return response.status(201).json(api.success(newUser));
+            return response.status(201).json(api.success(newUser, 'User created'));
         } catch (err) {
             if (err instanceof ValidationError) {
-                err.errors.forEach((error) => {
-                    errorList[error.path] = error.message;
-                });
+                err.errors.forEach((error) => { errorList[error.path] = error.message; });
             }
 
-            response.status(400).json({
-                errors: errorList,
-                statusCode: 400,
-            });
+            response.status(400).json({ errors: errorList, statusCode: 400 });
 
             return next(err);
         }
@@ -76,20 +71,15 @@ module.exports = (params) => {
                 return response.status(404).json(api.error('User not found', 404));
             }
 
-            const updateUser = await users.updateUser(request.params.id, request.body);
+            const updatedUser = await users.updateUser(request.params.id, request.body);
 
-            return response.json(api.success(updateUser));
+            return response.json(api.success(updatedUser, 'User updated'));
         } catch (err) {
             if (err instanceof ValidationError) {
-                err.errors.forEach((error) => {
-                    errorList[error.path] = error.message;
-                });
+                err.errors.forEach((error) => { errorList[error.path] = error.message; });
             }
 
-            response.status(400).json({
-                errors: errorList,
-                statusCode: 400,
-            });
+            response.status(400).json({ errors: errorList, statusCode: 400 });
 
             return next(err);
         }
@@ -108,9 +98,9 @@ module.exports = (params) => {
                 return response.status(404).json(api.error('User not found', 404));
             }
 
-            const deleteUser = await users.deleteUser(request.params.id);
+            const deletedUser = await users.deleteUser(request.params.id);
 
-            return response.json(api.success(deleteUser));
+            return response.json(api.success(null, deletedUser));
         } catch (err) {
             return next(err);
         }

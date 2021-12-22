@@ -47,15 +47,10 @@ module.exports = (params) => {
             return response.status(201).json(api.success(newPost, 'Post created'));
         } catch (err) {
             if (err instanceof ValidationError) {
-                err.errors.forEach((error) => {
-                    errorList[error.path] = error.message;
-                });
-
-                response.status(500).json({
-                    errors: errorList,
-                    statusCode: 500,
-                });
+                err.errors.forEach((error) => { errorList[error.path] = error.message; });
             }
+
+            response.status(400).json({ errors: errorList, statusCode: 400 });
 
             return next(err);
         }
@@ -81,15 +76,10 @@ module.exports = (params) => {
             return response.json(api.success(updatedPost, 'Post updated'));
         } catch (err) {
             if (err instanceof ValidationError) {
-                err.errors.forEach((error) => {
-                    errorList[error.path] = error.message;
-                });
-
-                response.status(500).json({
-                    errors: errorList,
-                    statusCode: 500,
-                });
+                err.errors.forEach((error) => { errorList[error.path] = error.message; });
             }
+
+            response.status(400).json({ errors: errorList, statusCode: 400 });
 
             return next(err);
         }
