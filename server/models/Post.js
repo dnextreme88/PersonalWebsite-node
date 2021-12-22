@@ -1,6 +1,11 @@
 const slugify = require('slugify');
+const Helpers = require('../lib/Helpers');
+
+const helpers = new Helpers();
 
 module.exports = (sequelize, SequelizeDataTypes) => {
+    const db = sequelize.models;
+
     const POST = sequelize.define('Post', {
         id: {
             type: SequelizeDataTypes.INTEGER,
@@ -31,8 +36,6 @@ module.exports = (sequelize, SequelizeDataTypes) => {
                 },
             },
             set() {
-                console.log(`===LOG: Setting slug...`);
-                console.log(this.title);
                 this.setDataValue('slug', slugify(this.title, {
                     lower: true,
                     strict: false,
@@ -57,6 +60,12 @@ module.exports = (sequelize, SequelizeDataTypes) => {
                 model: 'Category',
                 key: 'id',
             },
+            validate: {
+                async isFound(value) {
+                    const category = await db.Category.findByPk(value);
+                    if (!category) throw new Error(helpers.addErrorMessage('categoryId'));
+                },
+            },
         },
         userId: {
             type: SequelizeDataTypes.INTEGER,
@@ -64,6 +73,12 @@ module.exports = (sequelize, SequelizeDataTypes) => {
             references: {
                 model: 'User',
                 key: 'id',
+            },
+            validate: {
+                async isFound(value) {
+                    const user = await db.User.findByPk(value);
+                    if (!user) throw new Error(helpers.addErrorMessage('userId'));
+                },
             },
         },
         createdAt: {
