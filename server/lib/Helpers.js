@@ -22,6 +22,8 @@ class Helpers {
 
         if (field === 'categoryId') {
             errorMessage = `Category id ${suffix}`;
+        } else if (field === 'soldItemId') {
+            errorMessage = `Sold item id ${suffix}`;
         } else if (field === 'userId') {
             errorMessage = `User id ${suffix}`;
         }
