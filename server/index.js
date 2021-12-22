@@ -5,7 +5,10 @@ const httpErrors = require('http-errors');
 const routes = require('./routes');
 
 const CategoryService = require('./services/CategoryService');
+const PaymentMethodService = require('./services/PaymentMethodService');
 const PostService = require('./services/PostService');
+const SellMethodService = require('./services/SellMethodService');
+const SoldItemService = require('./services/SoldItemService');
 const UserService = require('./services/UserService');
 
 module.exports = (config) => {
@@ -16,6 +19,12 @@ module.exports = (config) => {
 
     // Services
     const users = new UserService(log);
+
+    // -- Archive
+    const paymentMethods = new PaymentMethodService(log);
+    const sellMethods = new SellMethodService(log);
+    const soldItems = new SoldItemService(log);
+
     // -- Blog
     const categories = new CategoryService(log);
     const posts = new PostService(log);
@@ -38,7 +47,10 @@ module.exports = (config) => {
 
     app.use('/api/', routes({
         categories,
+        paymentMethods,
         posts,
+        sellMethods,
+        soldItems,
         users,
     }));
 
