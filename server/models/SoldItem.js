@@ -23,6 +23,14 @@ module.exports = (sequelize, SequelizeDataTypes) => {
             type: SequelizeDataTypes.FLOAT,
             allowNull: false,
             validate: {
+                isFloat: {
+                    args: true,
+                    msg: 'Price must be a float or an integer',
+                },
+                min: {
+                    args: 1,
+                    msg: 'Price must be greater than or equal to 1',
+                },
                 notNull: {
                     args: true,
                     msg: 'Price cannot be null',
