@@ -26,7 +26,8 @@ class SoldItemService {
             condition: body.condition,
             size: body.size,
             imageLocation: body.imageLocation,
-            dateSold: body.dateSold,
+            // There's a bug when replacing dateSold input in SoldItem.js using set()
+            dateSold: body.dateSold.replace(/\//g, '-'),
         };
         const newSoldItem = await db.SoldItem.create(values);
 
