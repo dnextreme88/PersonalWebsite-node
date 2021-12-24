@@ -1,4 +1,6 @@
+/* eslint-disable global-require */
 const express = require('express');
+const passport = require('passport');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -54,7 +56,16 @@ module.exports = (config) => {
         app.set('trust proxy', 'loopback');
     }
 
-    app.use('/api/', routes({
+    require('./config/passport')(passport); // Load passport strategies
+    app.use(passport.initialize()); // Initialize Passport
+
+    // Load passport routes to be used for accessing API routes
+    const authRoutesIndex = require('./routes/authRoutesIndex');
+    const authRoutes = require('./routes/authRoutes')(passport);
+    app.use('/passport/', authRoutesIndex({ authRoutes }));
+
+    // Protect routes and require a JWT token in the Authorization Header
+    app.use('/api/', passport.authenticate('jwt', { session: false, failureRedirect: '/passport/auth/unauthorized' }), routes({
         categories,
         paymentMethods,
         posts,
