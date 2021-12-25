@@ -1,3 +1,5 @@
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const db = require('../models');
 
 class TokenService {
@@ -15,6 +17,14 @@ class TokenService {
         const newToken = await db.Token.create(values);
 
         return newToken;
+    }
+
+    async signJwt(userId, userEmail) {
+        const signedToken = await jwt.sign({ id: userId, email: userEmail }, process.env.JWT_SECRET_OR_KEY, { expiresIn: '12h', notBefore: '0' });
+        const tokenExpirationEpoch = new Date().setHours(new Date().getHours() + 12);
+        const tokenExpiration = new Date(tokenExpirationEpoch).toString();
+
+        return { token: signedToken, dateExpiration: tokenExpiration };
     }
 
     async expireToken(id) {

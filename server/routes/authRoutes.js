@@ -27,24 +27,21 @@ module.exports = () => {
                 });
             }
 
-            // Upon successful signup and authentication, create a JWT and send a response
-            const token = await jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET_OR_KEY, { expiresIn: '12h', notBefore: '0' });
-            const tokenExpirationEpoch = new Date().setHours(new Date().getHours() + 12);
-            const tokenExpiration = new Date(tokenExpirationEpoch).toString();
-
+            // Sign JWT then create the record in DB
+            const signedToken = await tokens.signJwt(user.id, user.email);
             const values = {
-                token,
-                expiresAt: new Date(tokenExpirationEpoch).toISOString(),
+                token: signedToken.token,
+                expiresAt: signedToken.dateExpiration,
                 userId: user.id,
             };
             await tokens.createToken(values);
 
             return res.status(201).send({
                 auth: true,
-                message: 'User created and created JWT',
+                message: 'User and Token created',
                 error: false,
                 statusCode: 201,
-                data: { token, tokenValidity: tokenExpiration, user },
+                data: { token: signedToken.token, tokenValidity: signedToken.dateExpiration, user },
             });
         })(req, res, next);
     });
@@ -66,14 +63,11 @@ module.exports = () => {
                 });
             }
 
-            // Upon successful signin and authentication, create a JWT and send a response
-            const token = await jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET_OR_KEY, { expiresIn: '12h', notBefore: '0' });
-            const tokenExpirationEpoch = new Date().setHours(new Date().getHours() + 12);
-            const tokenExpiration = new Date(tokenExpirationEpoch).toString();
-
+            // Sign JWT then create the record in DB
+            const signedToken = await tokens.signJwt(user.id, user.email);
             const values = {
-                token,
-                expiresAt: new Date(tokenExpirationEpoch).toISOString(),
+                token: signedToken.token,
+                expiresAt: signedToken.dateExpiration,
                 userId: user.id,
             };
             await tokens.createToken(values);
@@ -83,7 +77,7 @@ module.exports = () => {
                 message: 'User logged in',
                 error: false,
                 statusCode: 200,
-                data: { token, tokenValidity: tokenExpiration, user },
+                data: { token: signedToken.token, tokenValidity: signedToken.dateExpiration, user },
             });
         })(req, res, next);
     });
