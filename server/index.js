@@ -1,4 +1,6 @@
+/* eslint-disable global-require */
 const express = require('express');
+const passport = require('passport');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -54,7 +56,37 @@ module.exports = (config) => {
         app.set('trust proxy', 'loopback');
     }
 
-    app.use('/api/', routes({
+    require('./config/passport')(passport); // Load passport strategies
+    app.use(passport.initialize()); // Initialize Passport
+
+    // Load passport routes to be used for accessing API routes
+    const authRoutesIndex = require('./routes/authRoutesIndex');
+    const authRoutes = require('./routes/authRoutes')(passport);
+    app.use('/passport/', authRoutesIndex({ authRoutes }));
+
+    // Protect routes and require a Bearer token in the Authorization Header
+    // REF: https://github.com/jaredhanson/passport/blob/935fbdbc2f63eb0a746a3e1373fb112c5efee6b6/lib/middleware/authenticate.js#L23-L40
+    app.use('/api/', (req, res, next) => {
+        passport.authenticate('bearer', (err, user, info) => {
+            if (err) return next(err);
+
+            if (!user) {
+                const errorDesc = info.split(', ')[2];
+                const errorDescIndex = errorDesc.indexOf('"') + 1; // Remove opening apostrophe
+                const message = errorDesc.slice(errorDescIndex, errorDesc.length - 1);
+
+                return res.status(401).json({
+                    auth: false,
+                    message,
+                    error: true,
+                    statusCode: 401,
+                    data: null,
+                });
+            }
+
+            return next();
+        })(req, res, next);
+    }, routes({
         categories,
         paymentMethods,
         posts,
