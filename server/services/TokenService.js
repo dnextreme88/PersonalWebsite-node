@@ -1,5 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 const db = require('../models');
 
 class TokenService {
@@ -35,6 +36,18 @@ class TokenService {
         });
 
         return expiredToken[1].dataValues;
+    }
+
+    async isTokenValid(token, userId) {
+        const getToken = await db.Token.findOne({
+            where: {
+                token,
+                expiresAt: { [Op.gte]: new Date().toISOString() },
+                userId,
+            },
+        });
+
+        return getToken;
     }
 
     async deleteToken(id) {

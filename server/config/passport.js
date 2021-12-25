@@ -1,11 +1,6 @@
 /* eslint-disable consistent-return */
-/* eslint-disable no-else-return */
-/* eslint-disable no-sync */
-/* eslint-disable object-shorthand */
-// Import dotenv for JWT key
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const LocalStrategy = require('passport-local').Strategy; // signin and signup
 const BearerStrategy = require('passport-http-bearer').Strategy;
@@ -13,12 +8,15 @@ const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const config = require('./index')[process.env.NODE_ENV || 'development'];
 const db = require('../models');
+const TokenService = require('../services/TokenService');
+const UserService = require('../services/UserService');
 
 const log = config.log();
 
 // Export local strategies, passing Passport module and the User table from server.js
 module.exports = (passport) => {
-    const Auth = db.User;
+    const tokens = new TokenService(log);
+    const users = new UserService(log);
     // Tell passport to use a new LocalStrategy called "local-signup"
     passport.use('local-signup', new LocalStrategy(
         {
@@ -28,36 +26,31 @@ module.exports = (passport) => {
             passReqToCallback: true, // So we can encrypt the password and add an entry into the Sequelize table
             session: false, // Don't use session storage, as we'll be setting JWT to local storage client side
         }, async (req, email, password, done) => {
-            // Check the User table for an entry matching the user-inputted email
-            Auth.findOne({
-                where: { email: email },
-            }).then((user) => {
-                if (user) {
-                    return done(null, false, { message: 'That email is already taken.', status: 400 });
-                } else {
-                    // REF: https://pretagteam.com/question/bcrypt-compare-hash-and-password
-                    bcrypt.hash(password, 12, (err, hash) => {
-                        if (err) return done(null, false, { message: 'Hashing failed.', status: 500 });
+            const user = await users.getByEmail(email);
+            if (user) {
+                return done(null, false, { message: 'That email is already taken.', status: 400 });
+            }
 
-                        // Create a row in the User table with the user's information
-                        const values = {
-                            username: req.body.username,
-                            email: email,
-                            firstName: req.body.firstName,
-                            middleName: req.body.middleName,
-                            lastName: req.body.lastName,
-                            password: hash,
-                        };
-                        Auth.create(values).then((newUser) => {
-                            if (!newUser) {
-                                // Return error: null and user: false
-                                return done(null, false, { message: 'Our servers are under a heavy load right now. Please try again in a moment.' });
-                            }
-                            // Otherwise, return error: null and the newUser
-                            return done(null, newUser);
-                        });
-                    });
+            // REF: https://pretagteam.com/question/bcrypt-compare-hash-and-password
+            bcrypt.hash(password, 12, async (err, hash) => {
+                if (err) return done(null, false, { message: 'Hashing failed.', status: 500 });
+
+                const values = {
+                    username: req.body.username,
+                    email,
+                    firstName: req.body.firstName,
+                    middleName: req.body.middleName,
+                    lastName: req.body.lastName,
+                    password: hash,
+                };
+                const newUser = await users.createUser(values);
+                if (!newUser) {
+                    // Return error: null and user: false, info: { message }
+                    return done(null, false, { message: 'Our servers are under a heavy load right now. Please try again in a moment.' });
                 }
+
+                // Return error: null and the newly created User
+                return done(null, newUser);
             });
         },
     ));
@@ -70,10 +63,7 @@ module.exports = (passport) => {
             passReqToCallback: true, // For email/password comparison to the User table
             session: false, // Don't use session storage, as we'll be setting JWT to local storage client side
         }, async (req, email, password, done) => {
-            // Check the User table for an entry matching the user-inputted email
-            const user = await Auth.findOne({
-                where: { email: email },
-            });
+            const user = await users.getByEmail(email);
             if (user) {
                 // Load hashed password from db
                 // REF: https://pretagteam.com/question/bcrypt-compare-hash-and-password
@@ -82,21 +72,20 @@ module.exports = (passport) => {
 
                     // If the user-inputted password does not match the password from the User table
                     if (!isValidPassword) {
-                        // Return error: null, user: false
+                        // Return error: null, user: false, info: { message }
                         return done(null, false, { message: 'Incorrect password.', status: 400 });
                     }
 
                     const userInfo = user.get();
+
                     // Return error: null and the authenticated user information
                     return done(null, userInfo);
                 });
             }
 
             // If no entry matches the user-inputted email
-            if (!user) {
-                // Return error: null, user: false
-                return done(null, false, { message: 'Email does not exist in our database', status: 404 });
-            }
+            // Return error: null, user: false, info: { message }
+            return done(null, false, { message: 'Email does not exist in our database', status: 404 });
         },
     ));
 
@@ -110,9 +99,7 @@ module.exports = (passport) => {
         log.info(`JWT Payload ID: ${jwtPayload.id}`);
         log.info(`JWT Payload Email: ${jwtPayload.email}`);
 
-        const user = await Auth.findOne({
-            where: { id: jwtPayload.id },
-        });
+        const user = await users.getById(jwtPayload.id);
         if (user) {
             log.info('Passport success: User found in database from config/passport.js');
             const userJwt = {
@@ -145,19 +132,11 @@ module.exports = (passport) => {
             }
 
             // Check if token is valid and not yet expired
-            const queryToken = await db.Token.findOne({
-                where: {
-                    token,
-                    expiresAt: { [Op.gte]: new Date().toISOString() },
-                    // decoded is an object defined by jwt.sign() function
-                    userId: decoded.id,
-                },
-            });
+            // decoded is an object returned by jwt.sign() function
+            const queryToken = await tokens.isTokenValid(token, decoded.id);
             if (!queryToken) return done(null, false, { message: 'Token not found' });
 
-            const user = await Auth.findByPk(queryToken.userId, {
-                attributes: { exclude: ['password'] },
-            });
+            const user = await users.getById(queryToken.userId);
 
             // Access the scope key by passing request.authInfo under route middlewares
             return done(null, user, { scope: 'read' });
