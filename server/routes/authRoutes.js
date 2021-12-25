@@ -2,11 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const config = require('../config')[process.env.NODE_ENV || 'development'];
+const TokenService = require('../services/TokenService');
 const db = require('../models');
 
 const router = express.Router();
 
 module.exports = () => {
+    const tokens = new TokenService(config.log());
     // POST route to signup using our local strategy 'local-signup'
     router.post('/user/signup', async (req, res, next) => {
         passport.authenticate('local-signup', async (err, user, info) => {
@@ -28,6 +31,13 @@ module.exports = () => {
             const token = await jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET_OR_KEY, { expiresIn: '12h', notBefore: '0' });
             const tokenExpirationEpoch = new Date().setHours(new Date().getHours() + 12);
             const tokenExpiration = new Date(tokenExpirationEpoch).toString();
+
+            const values = {
+                token,
+                expiresAt: new Date(tokenExpirationEpoch).toISOString(),
+                userId: user.id,
+            };
+            await tokens.createToken(values);
 
             return res.status(201).send({
                 auth: true,
@@ -60,6 +70,13 @@ module.exports = () => {
             const token = await jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET_OR_KEY, { expiresIn: '12h', notBefore: '0' });
             const tokenExpirationEpoch = new Date().setHours(new Date().getHours() + 12);
             const tokenExpiration = new Date(tokenExpirationEpoch).toString();
+
+            const values = {
+                token,
+                expiresAt: new Date(tokenExpirationEpoch).toISOString(),
+                userId: user.id,
+            };
+            await tokens.createToken(values);
 
             return res.send({
                 auth: true,
@@ -159,21 +176,6 @@ module.exports = () => {
                     notBefore: new Date(verifiedJwt.nbf * 1000).toString(),
                     expiresIn: new Date(verifiedJwt.exp * 1000).toString(),
                 },
-            });
-        } catch (err) {
-            return next(err);
-        }
-    });
-
-    // Custom unauthorized message when user credentials aren't valid
-    router.get('/unauthorized', async (request, response, next) => {
-        try {
-            return response.status(401).json({
-                auth: false,
-                message: 'Unauthorized',
-                error: true,
-                statusCode: 401,
-                data: null,
             });
         } catch (err) {
             return next(err);

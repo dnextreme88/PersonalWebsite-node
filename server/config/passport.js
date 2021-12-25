@@ -5,7 +5,10 @@
 // Import dotenv for JWT key
 require('dotenv').config();
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
+const jwt = require('jsonwebtoken');
 const LocalStrategy = require('passport-local').Strategy; // signin and signup
+const BearerStrategy = require('passport-http-bearer').Strategy;
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const config = require('./index')[process.env.NODE_ENV || 'development'];
@@ -126,6 +129,39 @@ module.exports = (passport) => {
         log.info('User not found in database from config/passport.js');
         // Return error: null, user: false, info: { message, status }
         return done(null, false, { message: 'User not found in database', status: 500 });
+    }));
+
+    passport.use('bearer', new BearerStrategy(async (token, done) => {
+        await jwt.verify(token, process.env.JWT_SECRET_OR_KEY, async (error, decoded) => {
+            if (error) {
+                let errorMessage;
+                if (error.name === 'JsonWebTokenError') {
+                    errorMessage = { message: error.message };
+                } else if (error.name === 'TokenExpiredError') {
+                    errorMessage = { message: `Token expired on ${error.expiredAt}` };
+                }
+
+                return done(null, false, errorMessage);
+            }
+
+            // Check if token is valid and not yet expired
+            const queryToken = await db.Token.findOne({
+                where: {
+                    token,
+                    expiresAt: { [Op.gte]: new Date().toISOString() },
+                    // decoded is an object defined by jwt.sign() function
+                    userId: decoded.id,
+                },
+            });
+            if (!queryToken) return done(null, false, { message: 'Token not found' });
+
+            const user = await Auth.findByPk(queryToken.userId, {
+                attributes: { exclude: ['password'] },
+            });
+
+            // Access the scope key by passing request.authInfo under route middlewares
+            return done(null, user, { scope: 'read' });
+        });
     }));
 
     // Save the user id (the second argument of the done function) in a session. It is later used
