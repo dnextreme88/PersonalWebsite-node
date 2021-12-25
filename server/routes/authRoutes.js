@@ -1,24 +1,22 @@
 require('dotenv').config();
 const express = require('express');
-const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 const config = require('../config')[process.env.NODE_ENV || 'development'];
 const TokenService = require('../services/TokenService');
-const db = require('../models');
 
 const router = express.Router();
 
 module.exports = () => {
     const tokens = new TokenService(config.log());
+
     // POST route to signup using our local strategy 'local-signup'
     router.post('/user/signup', async (req, res, next) => {
         passport.authenticate('local-signup', async (err, user, info) => {
-            if (err) {
-                return res.json({ error: err });
-            }
+            if (err) return res.json({ error: err });
 
             if (!user) {
-                return res.status(info.status).send({
+                return res.status(info.status).json({
                     auth: false,
                     message: info.message,
                     error: true,
@@ -36,7 +34,7 @@ module.exports = () => {
             };
             await tokens.createToken(values);
 
-            return res.status(201).send({
+            return res.status(201).json({
                 auth: true,
                 message: 'User and Token created',
                 error: false,
@@ -49,12 +47,10 @@ module.exports = () => {
     // POST route to sign in using our local strategy 'local-signin'
     router.post('/user/signin', async (req, res, next) => {
         passport.authenticate('local-signin', async (err, user, info) => {
-            if (err) {
-                return res.json({ error: err });
-            }
+            if (err) return res.json({ error: err });
 
             if (!user) {
-                return res.status(info.status).send({
+                return res.status(info.status).json({
                     auth: false,
                     message: info.message,
                     error: true,
@@ -72,65 +68,12 @@ module.exports = () => {
             };
             await tokens.createToken(values);
 
-            return res.send({
+            return res.json({
                 auth: true,
                 message: 'User logged in',
                 error: false,
                 statusCode: 200,
                 data: { token: signedToken.token, tokenValidity: signedToken.dateExpiration, user },
-            });
-        })(req, res, next);
-    });
-
-    // GET /authenticate?email={req.query.email}
-    router.get('/authenticate', async (req, res, next) => {
-        passport.authenticate('jwt', { session: false }, async (err, user, info) => {
-            if (err) {
-                return res.json({ error: err });
-            }
-
-            if (info) {
-                let dataObj;
-                if (info.name === 'JsonWebTokenError') {
-                    dataObj = null;
-                } else if (info.name === 'TokenExpiredError') {
-                    dataObj = { expiredAt: info.expiredAt };
-                }
-
-                return res.status(403).send({
-                    auth: false,
-                    message: info.message,
-                    error: true,
-                    statusCode: 403,
-                    data: dataObj,
-                });
-            }
-
-            const findUser = await db.User.findOne({
-                where: { email: req.query.email },
-            });
-            if (!findUser) {
-                return res.status(404).send({
-                    auth: false,
-                    message: 'No user exists in the database with that email',
-                    error: true,
-                    statusCode: 404,
-                    data: null,
-                });
-            }
-
-            return res.send({
-                auth: true,
-                message: 'User found in database',
-                error: false,
-                statusCode: 200,
-                data: {
-                    id: user.id,
-                    email: user.email,
-                    issuedAt: user.issuedAt,
-                    notBefore: user.notBefore,
-                    expiresIn: user.expiresIn,
-                },
             });
         })(req, res, next);
     });
@@ -147,7 +90,7 @@ module.exports = () => {
                         dataObj = { expiredAt: error.expiredAt };
                     }
 
-                    return res.status(403).send({
+                    return res.status(403).json({
                         auth: false,
                         message: error.message,
                         error: true,
@@ -158,7 +101,7 @@ module.exports = () => {
 
                 return decoded;
             });
-            return res.send({
+            return res.json({
                 auth: true,
                 message: 'JWT Payload information',
                 error: false,
