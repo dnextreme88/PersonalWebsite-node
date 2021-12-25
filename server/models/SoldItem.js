@@ -66,17 +66,11 @@ module.exports = (sequelize, SequelizeDataTypes) => {
             },
         },
         imageLocation: {
-            type: SequelizeDataTypes.STRING(100),
+            type: SequelizeDataTypes.TEXT,
             allowNull: true,
-            validate: {
-                len: {
-                    args: [0, 100],
-                    msg: 'Image location must not exceed 100 characters',
-                },
-            },
         },
         dateSold: {
-            type: SequelizeDataTypes.DATE,
+            type: SequelizeDataTypes.STRING(254),
             allowNull: true,
             validate: {
                 isDate: {
