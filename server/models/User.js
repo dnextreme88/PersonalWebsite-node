@@ -61,6 +61,16 @@ module.exports = (sequelize, SequelizeDataTypes) => {
     },
     {
         freezeTableName: true,
+        hooks: {
+            afterCreate: (record) => {
+                const rec = record;
+                delete rec.dataValues.password;
+            },
+            afterUpdate: (record) => {
+                const rec = record;
+                delete rec.dataValues.password;
+            },
+        },
     });
 
     return USER;
