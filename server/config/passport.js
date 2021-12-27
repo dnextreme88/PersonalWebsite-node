@@ -77,11 +77,11 @@ module.exports = (passport) => { // Export local strategies, passing the Passpor
                     // Return error: null and the authenticated user information
                     return done(null, userInfo);
                 });
+            } else {
+                // If no entry matches the user-inputted email
+                // Return error: null, user: false, info: { message }
+                return done(null, false, { message: 'Email does not exist in our database', status: 404 });
             }
-
-            // If no entry matches the user-inputted email
-            // Return error: null, user: false, info: { message }
-            return done(null, false, { message: 'Email does not exist in our database', status: 404 });
         },
     ));
 
