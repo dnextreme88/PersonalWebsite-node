@@ -103,6 +103,9 @@ module.exports = (passport) => { // Export local strategies, passing the Passpor
             const queryToken = await tokens.isTokenValid(token, decoded.id);
             if (!queryToken) return done(null, false, { message: 'Token not found' });
 
+            const isTokenExpired = await tokens.isTokenExpired(token);
+            if (isTokenExpired) return done(null, false, { message: 'Token has expired' });
+
             const user = await users.getById(queryToken.userId);
 
             // Access the scope key by passing request.authInfo under route middlewares

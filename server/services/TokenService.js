@@ -8,6 +8,14 @@ class TokenService {
         this.log = log;
     }
 
+    async getByToken(token) {
+        const getToken = await db.Token.findOne({
+            where: { token },
+        });
+
+        return getToken;
+    }
+
     async createToken(body) {
         const values = {
             token: body.token,
@@ -48,6 +56,16 @@ class TokenService {
         });
 
         return getToken;
+    }
+
+    async isTokenExpired(token) {
+        const getToken = await db.Token.findOne({
+            where: { token, isExpired: true },
+        });
+
+        if (getToken) return true;
+
+        return false;
     }
 
     async deleteToken(id) {

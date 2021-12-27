@@ -78,6 +78,38 @@ module.exports = () => {
         })(req, res, next);
     });
 
+    router.post('/user/signout', async (req, res, next) => {
+        passport.authenticate('bearer', async (err, user, info) => {
+            if (err) return res.json({ error: err });
+
+            if (!user) {
+                const errorDesc = info.split(', ')[2];
+                const errorDescIndex = errorDesc.indexOf('"') + 1; // Remove opening apostrophe
+                const message = errorDesc.slice(errorDescIndex, errorDesc.length - 1);
+
+                return res.status(401).json({
+                    auth: false,
+                    message,
+                    error: true,
+                    statusCode: 401,
+                    data: null,
+                });
+            }
+            // Get bearer token from Authorization Header and expire the token
+            const bearerToken = req.header('authorization').slice(7);
+            const token = await tokens.getByToken(bearerToken);
+            await tokens.expireToken(token.id);
+
+            return res.json({
+                auth: false,
+                message: 'User logged out',
+                error: false,
+                statusCode: 200,
+                data: null,
+            });
+        })(req, res, next);
+    });
+
     // POST verify token
     router.post('/verifyJwt', async (req, res, next) => {
         try {
@@ -101,6 +133,30 @@ module.exports = () => {
 
                 return decoded;
             });
+
+            // Check if the token is in the DB or if it has expired
+            const token = await tokens.getByToken(req.body.token);
+            if (!token) {
+                return res.status(404).json({
+                    auth: false,
+                    message: 'Token not found',
+                    error: true,
+                    statusCode: 404,
+                    data: null,
+                });
+            }
+
+            const isTokenExpired = await tokens.isTokenExpired(req.body.token);
+            if (isTokenExpired) {
+                return res.status(401).json({
+                    auth: false,
+                    message: 'Token has expired',
+                    error: true,
+                    statusCode: 401,
+                    data: null,
+                });
+            }
+
             return res.json({
                 auth: true,
                 message: 'JWT Payload information',
