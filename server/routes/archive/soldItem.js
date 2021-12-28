@@ -56,6 +56,23 @@ module.exports = (params) => {
         }
     });
 
+    router.post('/filter', async (request, response, next) => {
+        try {
+            const filterParams = {
+                month: request.body.month ? request.body.month : '',
+                year: request.body.year ? request.body.year : '',
+                brand: request.body.brand ? request.body.brand : '',
+                type: request.body.type ? request.body.type : '',
+            };
+
+            const allSoldItems = await soldItems.getAllByFilter(filterParams);
+
+            return response.json(api.success(allSoldItems));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     // UPDATE
     router.post('/:id/update', async (request, response, next) => {
         const errorList = {};

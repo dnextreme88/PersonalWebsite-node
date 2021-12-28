@@ -13,6 +13,44 @@ class SoldItemService {
         return soldItems;
     }
 
+    async getAllByFilter(filterParams) {
+        // Check whether we add a WHERE clause if at least one of the values of the filter parameter is greater than 0
+        const whereClause = Object.values(filterParams).some((value) => value.length > 0) ? 'WHERE' : '';
+        const andClause = ' AND';
+        const soldItemAttr = await db.SoldItem.rawAttributes;
+        const soldItemFields = [];
+        let query;
+
+        Object.keys(soldItemAttr).forEach((fieldKey) => {
+            const fieldName = ` "SoldItem"."${fieldKey}"`;
+            soldItemFields.push(fieldName);
+        });
+
+        // Build query
+        query = `SELECT ${soldItemFields} FROM "SoldItem" ${whereClause} `;
+
+        if (filterParams.month) {
+            query += `"dateSold" LIKE '%-${filterParams.month}-%'`;
+        }
+        if (filterParams.year) {
+            const appender = filterParams.month ? andClause : '';
+            query += `${appender} "dateSold" LIKE '${filterParams.year}%'`;
+        }
+        if (filterParams.brand) {
+            const appender = filterParams.month || filterParams.year ? andClause : '';
+            query += `${appender} "name" LIKE '%${filterParams.brand}%'`;
+        }
+        if (filterParams.type) {
+            const appender = filterParams.month || filterParams.year || filterParams.brand ? andClause : '';
+            query += `${appender} "name" LIKE '%${filterParams.type}%'`;
+        }
+
+        // Run query
+        const soldItems = await db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT });
+
+        return soldItems;
+    }
+
     async getById(id) {
         const soldItem = await db.SoldItem.findByPk(id);
 
