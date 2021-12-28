@@ -63,7 +63,7 @@ module.exports = (passport) => { // Export local strategies, passing the Passpor
             if (user) {
                 // Load hashed password from db
                 // REF: https://pretagteam.com/question/bcrypt-compare-hash-and-password
-                bcrypt.compare(password, user.password, (err, isValidPassword) => {
+                bcrypt.compare(password, user.password, async (err, isValidPassword) => {
                     if (err) return done(null, false, { message: 'Password comparison failed.', status: 500 });
 
                     // If the user-inputted password does not match the password from the User table
@@ -72,7 +72,7 @@ module.exports = (passport) => { // Export local strategies, passing the Passpor
                         return done(null, false, { message: 'Incorrect password.', status: 400 });
                     }
 
-                    const userInfo = user.get();
+                    const userInfo = await users.getByEmail(email, false);
 
                     // Return error: null and the authenticated user information
                     return done(null, userInfo);
@@ -102,6 +102,9 @@ module.exports = (passport) => { // Export local strategies, passing the Passpor
             // decoded is an object returned by jwt.sign() function
             const queryToken = await tokens.isTokenValid(token, decoded.id);
             if (!queryToken) return done(null, false, { message: 'Token not found' });
+
+            const isTokenExpired = await tokens.isTokenExpired(token);
+            if (isTokenExpired) return done(null, false, { message: 'Token has expired' });
 
             const user = await users.getById(queryToken.userId);
 

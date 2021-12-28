@@ -24,10 +24,17 @@ class UserService {
         return user;
     }
 
-    async getByEmail(email) {
-        const user = await db.User.findOne({
+    async getByEmail(email, showPassword = true) {
+        let user = await db.User.findOne({
             where: { email },
         });
+
+        if (!showPassword) {
+            user = await db.User.findOne({
+                where: { email },
+                attributes: { exclude: hideAttributes },
+            });
+        }
 
         return user;
     }
