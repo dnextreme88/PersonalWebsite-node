@@ -42,7 +42,26 @@ module.exports = (params) => {
         const errorList = {};
 
         try {
-            const newSoldItem = await soldItems.createSoldItem(request.body);
+            const soldItemValues = {
+                name: request.body.name,
+                price: request.body.price,
+                condition: request.body.condition,
+                size: request.body.size,
+                imageLocation: request.body.imageLocation,
+                dateSold: request.body.dateSold,
+            };
+            const paymentMethodValues = {
+                paymentMethod: request.body.paymentMethod,
+                paymentLocation: request.body.paymentLocation,
+            };
+            const sellMethodValues = {
+                sellMethod: request.body.sellMethod,
+                sellLocation: request.body.sellLocation,
+            };
+
+            const newSoldItem = await soldItems.createSoldItem(
+                soldItemValues, paymentMethodValues, sellMethodValues,
+            );
 
             return response.status(201).json(api.success(newSoldItem, 'Sold item created'));
         } catch (err) {

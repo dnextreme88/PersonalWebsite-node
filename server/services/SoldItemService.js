@@ -1,4 +1,10 @@
+/* eslint-disable no-invalid-this */
 const db = require('../models');
+const PaymentMethodService = require('./PaymentMethodService');
+const SellMethodService = require('./SellMethodService');
+
+const paymentMethods = new PaymentMethodService(this.log);
+const sellMethods = new SellMethodService(this.log);
 
 class SoldItemService {
     constructor(log) {
@@ -66,7 +72,7 @@ class SoldItemService {
         return soldItem;
     }
 
-    async createSoldItem(body) {
+    async createSoldItem(body, paymentMethodBody, sellMethodBody) {
         const values = {
             name: body.name,
             price: body.price,
@@ -77,6 +83,20 @@ class SoldItemService {
             dateSold: body.dateSold.replace(/\//g, '-'),
         };
         const newSoldItem = await db.SoldItem.create(values);
+
+        const paymentMethodValues = {
+            method: paymentMethodBody.paymentMethod,
+            remittanceLocation: paymentMethodBody.paymentLocation,
+            soldItemId: newSoldItem.id,
+        };
+        await paymentMethods.createPaymentMethod(paymentMethodValues);
+
+        const sellMethodValues = {
+            method: sellMethodBody.sellMethod,
+            location: sellMethodBody.sellLocation,
+            soldItemId: newSoldItem.id,
+        };
+        await sellMethods.createSellMethod(sellMethodValues);
 
         return newSoldItem;
     }
