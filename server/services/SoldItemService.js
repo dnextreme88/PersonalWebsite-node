@@ -7,6 +7,10 @@ class SoldItemService {
 
     async getAll() {
         const soldItems = await db.SoldItem.findAll({
+            include: [
+                { model: await db.PaymentMethod },
+                { model: await db.SellMethod },
+            ],
             order: [['createdAt', 'ASC']],
         });
 
@@ -52,7 +56,12 @@ class SoldItemService {
     }
 
     async getById(id) {
-        const soldItem = await db.SoldItem.findByPk(id);
+        const soldItem = await db.SoldItem.findByPk(id, {
+            include: [
+                { model: await db.PaymentMethod },
+                { model: await db.SellMethod },
+            ],
+        });
 
         return soldItem;
     }

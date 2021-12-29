@@ -65,5 +65,7 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         freezeTableName: true,
     });
 
+    SELL_METHOD.associate = (models) => SELL_METHOD.belongsTo(models.SoldItem, { as: 'soldItem' });
+
     return SELL_METHOD;
 };

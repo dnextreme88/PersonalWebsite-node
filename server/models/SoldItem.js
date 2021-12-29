@@ -91,5 +91,10 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         freezeTableName: true,
     });
 
+    SOLD_ITEM.associate = (models) => {
+        SOLD_ITEM.hasOne(models.PaymentMethod, { foreignKey: 'soldItemId' });
+        SOLD_ITEM.hasOne(models.SellMethod, { foreignKey: 'soldItemId' });
+    };
+
     return SOLD_ITEM;
 };
