@@ -1,9 +1,25 @@
+const fs = require('fs');
 const express = require('express');
+const multer = require('multer');
+const uuid = require('uuid').v4;
 const { ValidationError } = require('sequelize');
 const ApiResponse = require('../../lib/ApiResponse');
 const Helpers = require('../../lib/Helpers');
 
 const router = express.Router();
+const directory = 'uploads/';
+const storageConfig = multer.diskStorage({
+    destination: async (req, file, cb) => {
+        if (!fs.existsSync(directory)) fs.mkdirSync(directory);
+
+        cb(null, directory);
+    },
+    filename: async (req, file, cb) => {
+        cb(null, `${uuid()}__${file.originalname}`);
+    },
+});
+
+const upload = multer({ storage: storageConfig });
 
 module.exports = (params) => {
     const { soldItems } = params;
@@ -38,7 +54,7 @@ module.exports = (params) => {
         }
     });
 
-    router.post('/', async (request, response, next) => {
+    router.post('/', upload.single('imageFile'), async (request, response, next) => {
         const errorList = {};
 
         try {
@@ -47,7 +63,7 @@ module.exports = (params) => {
                 price: request.body.price,
                 condition: request.body.condition,
                 size: request.body.size,
-                imageLocation: request.body.imageLocation,
+                imageLocation: request.file ? directory + request.file.filename : null,
                 dateSold: request.body.dateSold,
             };
             const paymentMethodValues = {
