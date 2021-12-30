@@ -7,6 +7,7 @@ class CategoryService {
 
     async getAll() {
         const categories = await db.Category.findAll({
+            include: { model: await db.Post },
             order: [['createdAt', 'ASC']],
         });
 
@@ -14,7 +15,9 @@ class CategoryService {
     }
 
     async getById(id) {
-        const category = await db.Category.findByPk(id);
+        const category = await db.Category.findByPk(id, {
+            include: { model: await db.Post },
+        });
 
         return category;
     }

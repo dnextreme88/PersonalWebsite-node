@@ -1,5 +1,7 @@
 const db = require('../models');
 
+const hideAttributes = ['password'];
+
 class PostService {
     constructor(log) {
         this.log = log;
@@ -7,6 +9,57 @@ class PostService {
 
     async getAll() {
         const posts = await db.Post.findAll({
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['createdAt', 'ASC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByCategory(categoryId) {
+        const posts = await db.Post.findAll({
+            where: { categoryId },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['createdAt', 'ASC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByUser(userId) {
+        const posts = await db.Post.findAll({
+            where: { userId },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
             order: [['createdAt', 'ASC']],
         });
 
@@ -14,7 +67,19 @@ class PostService {
     }
 
     async getById(id) {
-        const post = await db.Post.findByPk(id);
+        const post = await db.Post.findByPk(id, {
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+        });
 
         return post;
     }

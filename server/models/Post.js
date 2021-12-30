@@ -93,5 +93,10 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         freezeTableName: true,
     });
 
+    POST.associate = (models) => {
+        POST.belongsTo(models.Category, { as: 'category' });
+        POST.belongsTo(models.User, { as: 'user' });
+    };
+
     return POST;
 };

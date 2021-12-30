@@ -10,6 +10,7 @@ class UserService {
     async getAll() {
         const users = await db.User.findAll({
             attributes: { exclude: hideAttributes },
+            include: { model: await db.Post },
             order: [['createdAt', 'ASC']],
         });
 
@@ -19,6 +20,7 @@ class UserService {
     async getById(id) {
         const user = await db.User.findByPk(id, {
             attributes: { exclude: hideAttributes },
+            include: { model: await db.Post },
         });
 
         return user;
