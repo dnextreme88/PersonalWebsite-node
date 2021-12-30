@@ -72,6 +72,22 @@ class SoldItemService {
             const appender = filterParams.month || filterParams.year || filterParams.brand ? andClause : '';
             query += `${appender} "name" LIKE '%${filterParams.type}%'`;
         }
+        if (filterParams.condition) {
+            const appender = filterParams.month || filterParams.year || filterParams.brand || filterParams.type ? andClause : '';
+            query += `${appender} "condition" = '${filterParams.condition}'`;
+        }
+        if (filterParams.size) {
+            const appender = filterParams.month || filterParams.year || filterParams.brand || filterParams.type || filterParams.condition ? andClause : '';
+            query += `${appender} "size" = '${filterParams.size}'`;
+        }
+        if (filterParams.paymentMethod) {
+            const appender = filterParams.month || filterParams.year || filterParams.brand || filterParams.type || filterParams.condition || filterParams.size ? andClause : '';
+            query += `${appender} "PaymentMethod"."method" = '${filterParams.paymentMethod}'`;
+        }
+        if (filterParams.sellMethod) {
+            const appender = filterParams.month || filterParams.year || filterParams.brand || filterParams.type || filterParams.condition || filterParams.size || filterParams.paymentMethod ? andClause : '';
+            query += `${appender} "SellMethod"."method" = '${filterParams.sellMethod}'`;
+        }
 
         query += ' ORDER BY "SoldItem"."createdAt" ASC';
 

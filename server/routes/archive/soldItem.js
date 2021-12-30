@@ -95,9 +95,13 @@ module.exports = (params) => {
         try {
             const filterParams = {
                 month: request.body.month ? request.body.month : '',
-                year: request.body.year ? request.body.year : '',
+                year: request.body.year ? request.body.year.toString() : '',
                 brand: request.body.brand ? request.body.brand : '',
                 type: request.body.type ? request.body.type : '',
+                condition: request.body.condition ? request.body.condition : '',
+                size: request.body.size ? request.body.size : '',
+                paymentMethod: request.body.paymentMethod ? request.body.paymentMethod : '',
+                sellMethod: request.body.sellMethod ? request.body.sellMethod : '',
             };
 
             const allSoldItems = await soldItems.getAllByFilter(filterParams);
