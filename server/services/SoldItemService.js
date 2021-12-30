@@ -170,7 +170,7 @@ class SoldItemService {
             condition: body.condition ? body.condition : soldItem.condition,
             size: body.size ? body.size : soldItem.size,
             imageLocation: body.imageLocation ? body.imageLocation : soldItem.imageLocation,
-            dateSold: body.dateSold ? body.dateSold : soldItem.dateSold,
+            dateSold: body.dateSold ? body.dateSold.replace(/\//g, '-') : soldItem.dateSold,
         };
         const updatedSoldItem = await db.SoldItem.update(values, {
             where: { id },
