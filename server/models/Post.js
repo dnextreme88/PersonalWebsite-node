@@ -53,6 +53,20 @@ module.exports = (sequelize, SequelizeDataTypes) => {
                 },
             },
         },
+        date: {
+            type: SequelizeDataTypes.STRING(254),
+            allowNull: false,
+            validate: {
+                isDate: {
+                    args: true,
+                    msg: 'Date must be a date string',
+                },
+                notNull: {
+                    args: true,
+                    msg: 'Date cannot be null',
+                },
+            },
+        },
         categoryId: {
             type: SequelizeDataTypes.INTEGER,
             onDelete: 'set null',
@@ -92,6 +106,11 @@ module.exports = (sequelize, SequelizeDataTypes) => {
     }, {
         freezeTableName: true,
     });
+
+    POST.associate = (models) => {
+        POST.belongsTo(models.Category, { as: 'category' });
+        POST.belongsTo(models.User, { as: 'user' });
+    };
 
     return POST;
 };

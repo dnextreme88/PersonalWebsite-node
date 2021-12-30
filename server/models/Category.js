@@ -31,5 +31,7 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         freezeTableName: true,
     });
 
+    CATEGORY.associate = (models) => CATEGORY.hasMany(models.Post, { foreignKey: 'categoryId' });
+
     return CATEGORY;
 };

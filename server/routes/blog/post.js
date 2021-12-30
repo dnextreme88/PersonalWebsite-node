@@ -6,7 +6,7 @@ const Helpers = require('../../lib/Helpers');
 const router = express.Router();
 
 module.exports = (params) => {
-    const { posts } = params;
+    const { categories, posts, users } = params;
     const api = new ApiResponse();
     const helpers = new Helpers();
 
@@ -15,6 +15,46 @@ module.exports = (params) => {
             const allPosts = await posts.getAll();
 
             return response.json(api.success(allPosts));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
+    router.get('/categories/:categoryId', async (request, response, next) => {
+        try {
+            const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.categoryId);
+            if (checkIfIdIsInt.error === true) {
+                return response.status(500).json(api.error(checkIfIdIsInt.message));
+            }
+
+            const category = await categories.getById(request.params.categoryId);
+            if (!category) {
+                return response.status(404).json(api.error(helpers.addErrorMessage('categoryId'), 404));
+            }
+
+            const allPosts = await posts.getAllByCategory(request.params.categoryId);
+
+            return response.json(api.success(allPosts, 'Posts by category'));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
+    router.get('/users/:userId', async (request, response, next) => {
+        try {
+            const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.userId);
+            if (checkIfIdIsInt.error === true) {
+                return response.status(500).json(api.error(checkIfIdIsInt.message));
+            }
+
+            const user = await users.getById(request.params.userId);
+            if (!user) {
+                return response.status(404).json(api.error(helpers.addErrorMessage('userId'), 404));
+            }
+
+            const allPosts = await posts.getAllByUser(request.params.userId);
+
+            return response.json(api.success(allPosts, 'Posts by user'));
         } catch (err) {
             return next(err);
         }
