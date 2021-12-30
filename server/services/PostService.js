@@ -89,6 +89,8 @@ class PostService {
             title: body.title,
             slug: '', // Slug is automatically set under server/models/Post.js
             content: body.content,
+            // There's a bug when replacing date input in Post.js using set()
+            date: body.date.replace(/\//g, '-'),
             categoryId: body.categoryId,
             userId: body.userId,
         };
@@ -103,6 +105,7 @@ class PostService {
             title: body.title ? body.title : post.title,
             slug: '', // Slug is automatically set under server/models/Post.js
             content: body.content ? body.content : post.content,
+            date: body.date ? body.date.replace(/\//g, '-') : post.date,
             categoryId: body.categoryId ? body.categoryId : post.categoryId,
             userId: body.userId ? body.userId : post.userId,
         };
