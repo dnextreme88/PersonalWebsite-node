@@ -7,6 +7,7 @@ class SellMethodService {
 
     async getAll() {
         const sellMethods = await db.SellMethod.findAll({
+            include: { model: await db.SoldItem, as: 'soldItem' },
             order: [['createdAt', 'ASC']],
         });
 
@@ -14,7 +15,9 @@ class SellMethodService {
     }
 
     async getById(id) {
-        const sellMethod = await db.SellMethod.findByPk(id);
+        const sellMethod = await db.SellMethod.findByPk(id, {
+            include: { model: await db.SoldItem, as: 'soldItem' },
+        });
 
         return sellMethod;
     }

@@ -65,5 +65,7 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         freezeTableName: true,
     });
 
+    PAYMENT_METHOD.associate = (models) => PAYMENT_METHOD.belongsTo(models.SoldItem, { as: 'soldItem' });
+
     return PAYMENT_METHOD;
 };

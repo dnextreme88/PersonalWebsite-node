@@ -1,9 +1,25 @@
+const fs = require('fs');
 const express = require('express');
+const multer = require('multer');
+const uuid = require('uuid').v4;
 const { ValidationError } = require('sequelize');
 const ApiResponse = require('../../lib/ApiResponse');
 const Helpers = require('../../lib/Helpers');
 
 const router = express.Router();
+const directory = 'uploads/';
+const storageConfig = multer.diskStorage({
+    destination: async (req, file, cb) => {
+        if (!fs.existsSync(directory)) fs.mkdirSync(directory);
+
+        cb(null, directory);
+    },
+    filename: async (req, file, cb) => {
+        cb(null, `${uuid()}__${file.originalname}`);
+    },
+});
+
+const upload = multer({ storage: storageConfig });
 
 module.exports = (params) => {
     const { soldItems } = params;
@@ -38,11 +54,30 @@ module.exports = (params) => {
         }
     });
 
-    router.post('/', async (request, response, next) => {
+    router.post('/', upload.single('imageFile'), async (request, response, next) => {
         const errorList = {};
 
         try {
-            const newSoldItem = await soldItems.createSoldItem(request.body);
+            const soldItemValues = {
+                name: request.body.name,
+                price: request.body.price,
+                condition: request.body.condition,
+                size: request.body.size,
+                imageLocation: request.file ? directory + request.file.filename : null,
+                dateSold: request.body.dateSold,
+            };
+            const paymentMethodValues = {
+                paymentMethod: request.body.paymentMethod,
+                paymentLocation: request.body.paymentLocation,
+            };
+            const sellMethodValues = {
+                sellMethod: request.body.sellMethod,
+                sellLocation: request.body.sellLocation,
+            };
+
+            const newSoldItem = await soldItems.createSoldItem(
+                soldItemValues, paymentMethodValues, sellMethodValues,
+            );
 
             return response.status(201).json(api.success(newSoldItem, 'Sold item created'));
         } catch (err) {
@@ -52,6 +87,23 @@ module.exports = (params) => {
 
             response.status(400).json({ errors: errorList, statusCode: 400 });
 
+            return next(err);
+        }
+    });
+
+    router.post('/filter', async (request, response, next) => {
+        try {
+            const filterParams = {
+                month: request.body.month ? request.body.month : '',
+                year: request.body.year ? request.body.year : '',
+                brand: request.body.brand ? request.body.brand : '',
+                type: request.body.type ? request.body.type : '',
+            };
+
+            const allSoldItems = await soldItems.getAllByFilter(filterParams);
+
+            return response.json(api.success(allSoldItems));
+        } catch (err) {
             return next(err);
         }
     });
