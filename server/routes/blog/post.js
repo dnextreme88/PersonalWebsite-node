@@ -50,12 +50,22 @@ module.exports = (params) => {
 
                         // Check if there's post for a given year and month (based on key)
                         if (j.toString() === postYear && value === postMonth) {
-                            const obj = {
+                            const data = {
                                 month: postMonth,
                                 year: postYear,
                                 text: `${key} ${postYear}`,
+                                count: 1,
                             };
-                            monthWithYear.push(obj);
+
+                            const isInArray = monthWithYear.filter((obj) => obj.text === data.text).length > 0;
+
+                            if (!isInArray) {
+                                monthWithYear.push(data);
+                            } else {
+                                for (let l = 0; l < monthWithYear.length; l++) {
+                                    if (monthWithYear[l].text === data.text) monthWithYear[l].count += 1;
+                                }
+                            }
                         }
                     }
                 }
