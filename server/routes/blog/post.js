@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 const express = require('express');
 const { ValidationError } = require('sequelize');
 const ApiResponse = require('../../lib/ApiResponse');
@@ -15,6 +16,52 @@ module.exports = (params) => {
             const allPosts = await posts.getAll();
 
             return response.json(api.success(allPosts));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
+    router.get('/monthsAndYears', async (request, response, next) => {
+        try {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const monthWithNum = {};
+
+            for (let i = 0; i < months.length; i++) {
+                let key = 0;
+                if (i < 9) {
+                    key = `0${i + 1}`;
+                } else {
+                    key = `${i + 1}`;
+                }
+                monthWithNum[months[i]] = key;
+            }
+
+            const startYear = 2011;
+            const endYear = 2022;
+            const monthWithYear = [];
+            const allPosts = await posts.getAll();
+
+            for (const [key, value] of Object.entries(monthWithNum)) {
+                for (let j = startYear; j < endYear; j++) {
+                    for (let k = 0; k < allPosts.length; k++) {
+                        const postDate = allPosts[k].date;
+                        const postYear = postDate.split('-')[0];
+                        const postMonth = postDate.split('-')[1];
+
+                        // Check if there's post for a given year and month (based on key)
+                        if (j.toString() === postYear && value === postMonth) {
+                            const obj = {
+                                month: postMonth,
+                                year: postYear,
+                                text: `${key} ${postYear}`,
+                            };
+                            monthWithYear.push(obj);
+                        }
+                    }
+                }
+            }
+
+            return response.json(api.success(monthWithYear));
         } catch (err) {
             return next(err);
         }
