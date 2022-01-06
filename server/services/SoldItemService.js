@@ -57,20 +57,36 @@ class SoldItemService {
         // Build query
         query = `SELECT ${soldItemFields}, ${paymentMethodFields}, ${sellMethodFields} FROM "SoldItem" AS "SoldItem" ${paymentMethodJoin} ${sellMethodJoin} ${whereClause} `;
 
-        if (filterParams.month) {
-            query += `"dateSold" LIKE '%-${filterParams.month}-%'`;
-        }
-        if (filterParams.year) {
-            const appender = filterParams.month ? andClause : '';
-            query += `${appender} "dateSold" LIKE '${filterParams.year}%'`;
-        }
         if (filterParams.brand) {
-            const appender = filterParams.month || filterParams.year ? andClause : '';
-            query += `${appender} "name" LIKE '%${filterParams.brand}%'`;
+            query += `"name" ILIKE '%${filterParams.brand}%'`;
         }
         if (filterParams.type) {
-            const appender = filterParams.month || filterParams.year || filterParams.brand ? andClause : '';
-            query += `${appender} "name" LIKE '%${filterParams.type}%'`;
+            const appender = filterParams.brand ? andClause : '';
+            query += `${appender} "name" ILIKE '%${filterParams.type}%'`;
+        }
+        if (filterParams.month) {
+            const appender = filterParams.brand || filterParams.type ? andClause : '';
+            query += `${appender} "dateSold" LIKE '%-${filterParams.month}-%'`;
+        }
+        if (filterParams.year) {
+            const appender = filterParams.brand || filterParams.type || filterParams.month ? andClause : '';
+            query += `${appender} "dateSold" LIKE '${filterParams.year}%'`;
+        }
+        if (filterParams.condition) {
+            const appender = filterParams.brand || filterParams.type || filterParams.month || filterParams.year ? andClause : '';
+            query += `${appender} "condition" = '${filterParams.condition}'`;
+        }
+        if (filterParams.size) {
+            const appender = filterParams.brand || filterParams.type || filterParams.month || filterParams.year || filterParams.condition ? andClause : '';
+            query += `${appender} "size" = '${filterParams.size}'`;
+        }
+        if (filterParams.paymentMethod) {
+            const appender = filterParams.brand || filterParams.type || filterParams.month || filterParams.year || filterParams.condition || filterParams.size ? andClause : '';
+            query += `${appender} "PaymentMethod"."method" = '${filterParams.paymentMethod}'`;
+        }
+        if (filterParams.sellMethod) {
+            const appender = filterParams.brand || filterParams.type || filterParams.month || filterParams.year || filterParams.condition || filterParams.size || filterParams.paymentMethod ? andClause : '';
+            query += `${appender} "SellMethod"."method" = '${filterParams.sellMethod}'`;
         }
 
         query += ' ORDER BY "SoldItem"."createdAt" ASC';
