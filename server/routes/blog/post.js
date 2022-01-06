@@ -41,8 +41,8 @@ module.exports = (params) => {
             const monthWithYear = [];
             const allPosts = await posts.getAll();
 
-            for (const [key, value] of Object.entries(monthWithNum)) {
-                for (let j = startYear; j < endYear; j++) {
+            for (let j = endYear; j > startYear; j--) {
+                for (const [key, value] of Object.entries(monthWithNum)) {
                     for (let k = 0; k < allPosts.length; k++) {
                         const postDate = allPosts[k].date;
                         const postYear = postDate.split('-')[0];
