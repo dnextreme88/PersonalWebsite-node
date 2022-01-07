@@ -21,6 +21,36 @@ module.exports = (params) => {
         }
     });
 
+    router.get('/year/:year/month/:month', async (request, response, next) => {
+        try {
+            const allPosts = await posts.getAllByYearMonth(request.params.year, request.params.month);
+
+            return response.json(api.success(allPosts));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
+    router.get('/year/:year', async (request, response, next) => {
+        try {
+            const allPosts = await posts.getAllByYear(request.params.year);
+
+            return response.json(api.success(allPosts));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
+    router.get('/month/:month', async (request, response, next) => {
+        try {
+            const allPosts = await posts.getAllByMonth(request.params.month);
+
+            return response.json(api.success(allPosts));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     router.get('/monthsAndYears', async (request, response, next) => {
         try {
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -56,6 +86,17 @@ module.exports = (params) => {
                                 text: `${key} ${postYear}`,
                                 count: 1,
                             };
+
+                            const isYearInArray = monthWithYear.filter((obj) => obj.text === postYear).length > 0;
+
+                            if (!isYearInArray) {
+                                const obj = { text: postYear, count: 1 };
+                                monthWithYear.push(obj);
+                            } else {
+                                for (let l = 0; l < monthWithYear.length; l++) {
+                                    if (monthWithYear[l].text === postYear) monthWithYear[l].count += 1;
+                                }
+                            }
 
                             const isInArray = monthWithYear.filter((obj) => obj.text === data.text).length > 0;
 

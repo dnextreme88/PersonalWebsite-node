@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const db = require('../models');
 
 const hideAttributes = ['password'];
@@ -9,6 +10,66 @@ class PostService {
 
     async getAll() {
         const posts = await db.Post.findAll({
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['createdAt', 'ASC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByYear(year) {
+        const posts = await db.Post.findAll({
+            where: { date: { [Op.like]: `${year}-%` } },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['createdAt', 'ASC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByMonth(month) {
+        const posts = await db.Post.findAll({
+            where: { date: { [Op.like]: `%-${month}-%` } },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['createdAt', 'ASC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByYearMonth(year, month) {
+        const posts = await db.Post.findAll({
+            where: { date: { [Op.like]: `${year}-${month}-%` } },
             include: [
                 {
                     model: await db.Category,
