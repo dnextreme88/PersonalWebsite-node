@@ -21,7 +21,7 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
         });
 
         return posts;
@@ -41,7 +41,7 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
         });
 
         return posts;
@@ -61,7 +61,7 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
         });
 
         return posts;
@@ -81,7 +81,7 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
         });
 
         return posts;
@@ -101,7 +101,7 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
         });
 
         return posts;
@@ -121,7 +121,7 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
         });
 
         return posts;
