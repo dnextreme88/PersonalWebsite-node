@@ -158,6 +158,26 @@ module.exports = (params) => {
         }
     });
 
+    router.get('/users/:userId/latest', async (request, response, next) => {
+        try {
+            const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.userId);
+            if (checkIfIdIsInt.error === true) {
+                return response.status(500).json(api.error(checkIfIdIsInt.message));
+            }
+
+            const user = await users.getById(request.params.userId);
+            if (!user) {
+                return response.status(404).json(api.error(helpers.addErrorMessage('userId'), 404));
+            }
+
+            const allPosts = await posts.getAllLatestByUser(request.params.userId);
+
+            return response.json(api.success(allPosts, 'Posts by user (latest 5)'));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     router.get('/:id', async (request, response, next) => {
         try {
             const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.id);

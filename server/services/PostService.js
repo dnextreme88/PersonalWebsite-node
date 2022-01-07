@@ -127,6 +127,27 @@ class PostService {
         return posts;
     }
 
+    async getAllLatestByUser(userId) {
+        const posts = await db.Post.findAll({
+            limit: 5,
+            where: { userId },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['date', 'DESC']],
+        });
+
+        return posts;
+    }
+
     async getById(id) {
         const post = await db.Post.findByPk(id, {
             include: [
