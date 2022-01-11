@@ -38,6 +38,24 @@ module.exports = (params) => {
         }
     });
 
+    router.get('/soldItems/:soldItemId', async (request, response, next) => {
+        try {
+            const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.soldItemId);
+            if (checkIfIdIsInt.error === true) {
+                return response.status(500).json(api.error(checkIfIdIsInt.message));
+            }
+
+            const paymentMethod = await paymentMethods.getBySoldItemId(request.params.soldItemId);
+            if (!paymentMethod) {
+                return response.status(404).json(api.error('Payment method not found', 404));
+            }
+
+            return response.json(api.success(paymentMethod));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     router.post('/', async (request, response, next) => {
         const errorList = {};
 

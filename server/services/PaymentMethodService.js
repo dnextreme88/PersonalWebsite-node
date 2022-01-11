@@ -22,6 +22,15 @@ class PaymentMethodService {
         return paymentMethod;
     }
 
+    async getBySoldItemId(soldItemId) {
+        const paymentMethod = await db.PaymentMethod.findOne({
+            where: { soldItemId },
+            include: { model: await db.SoldItem, as: 'soldItem' },
+        });
+
+        return paymentMethod;
+    }
+
     async createPaymentMethod(body) {
         const values = {
             method: body.method,
