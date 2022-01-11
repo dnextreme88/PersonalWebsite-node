@@ -3,9 +3,28 @@ const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize');
 const db = require('../models');
 
+const hideAttributes = ['password'];
+
 class TokenService {
     constructor(log) {
         this.log = log;
+    }
+
+    async getAllByUserLatestLogins(userId) {
+        const getToken = await db.Token.findAll({
+            // Hide the token field as it's a sensitive data to show to the client
+            attributes: { exclude: 'token' },
+            where: { userId },
+            limit: 5,
+            include: {
+                model: await db.User,
+                as: 'user',
+                attributes: { exclude: hideAttributes },
+            },
+            order: [['createdAt', 'DESC']],
+        });
+
+        return getToken;
     }
 
     async getByToken(token) {

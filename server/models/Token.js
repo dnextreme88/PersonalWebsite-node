@@ -55,5 +55,7 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         freezeTableName: true,
     });
 
+    TOKEN.associate = (models) => TOKEN.belongsTo(models.User, { as: 'user' });
+
     return TOKEN;
 };
