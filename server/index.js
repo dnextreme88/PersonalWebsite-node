@@ -70,6 +70,19 @@ module.exports = (config) => {
         passport.authenticate('bearer', (err, user, info) => {
             if (err) return next(err);
 
+            // Get bearer token from Authorization Header and check if bearer token is null or if
+            // it only contains "Bearer"
+            const bearerToken = req.header('authorization');
+            if (!bearerToken || bearerToken.length < 7) {
+                return res.status(401).json({
+                    auth: false,
+                    message: 'Token not found in Authorization headers',
+                    error: true,
+                    statusCode: 401,
+                    data: null,
+                });
+            }
+
             if (!user) {
                 const errorDesc = info.split(', ')[2];
                 const errorDescIndex = errorDesc.indexOf('"') + 1; // Remove opening apostrophe

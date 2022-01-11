@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const db = require('../models');
 
 const hideAttributes = ['password'];
@@ -20,7 +21,67 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByYear(year) {
+        const posts = await db.Post.findAll({
+            where: { date: { [Op.like]: `${year}-%` } },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['date', 'DESC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByMonth(month) {
+        const posts = await db.Post.findAll({
+            where: { date: { [Op.like]: `%-${month}-%` } },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['date', 'DESC']],
+        });
+
+        return posts;
+    }
+
+    async getAllByYearMonth(year, month) {
+        const posts = await db.Post.findAll({
+            where: { date: { [Op.like]: `${year}-${month}-%` } },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['date', 'DESC']],
         });
 
         return posts;
@@ -40,7 +101,7 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
         });
 
         return posts;
@@ -60,7 +121,28 @@ class PostService {
                     attributes: { exclude: hideAttributes },
                 },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['date', 'DESC']],
+        });
+
+        return posts;
+    }
+
+    async getAllLatestByUser(userId) {
+        const posts = await db.Post.findAll({
+            limit: 5,
+            where: { userId },
+            include: [
+                {
+                    model: await db.Category,
+                    as: 'category',
+                },
+                {
+                    model: await db.User,
+                    as: 'user',
+                    attributes: { exclude: hideAttributes },
+                },
+            ],
+            order: [['date', 'DESC']],
         });
 
         return posts;
