@@ -9,36 +9,14 @@ module.exports = {
             title: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
-                validate: {
-                    len: {
-                        args: [0, 100],
-                        msg: 'Title must not exceed 100 characters',
-                    },
-                    notNull: {
-                        args: true,
-                        msg: 'Title cannot be null',
-                    },
-                },
             },
             slug: {
                 type: Sequelize.STRING(200),
                 allowNull: true,
-                validate: {
-                    len: {
-                        args: [0, 200],
-                        msg: 'Slug must not exceed 200 characters',
-                    },
-                },
             },
             content: {
                 type: Sequelize.TEXT,
                 allowNull: false,
-                validate: {
-                    notNull: {
-                        args: true,
-                        msg: 'Content cannot be null',
-                    },
-                },
             },
             categoryId: {
                 type: Sequelize.INTEGER,

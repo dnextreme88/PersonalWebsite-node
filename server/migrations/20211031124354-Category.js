@@ -9,16 +9,6 @@ module.exports = {
             name: {
                 type: Sequelize.STRING(50),
                 allowNull: false,
-                validate: {
-                    len: {
-                        args: [0, 50],
-                        msg: 'Name must not exceed 50 characters',
-                    },
-                    notNull: {
-                        args: true,
-                        msg: 'Name cannot be null',
-                    },
-                },
             },
             createdAt: {
                 type: Sequelize.DATE,

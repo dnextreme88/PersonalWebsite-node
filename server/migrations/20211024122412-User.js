@@ -9,29 +9,9 @@ module.exports = {
             username: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
-                validate: {
-                    notNull: {
-                        args: true,
-                        msg: 'Username cannot be null',
-                    },
-                },
             },
             email: {
                 type: Sequelize.STRING(100),
-                validate: {
-                    isEmail: {
-                        args: true,
-                        msg: 'Email is not a valid email address',
-                    },
-                    len: {
-                        args: [0, 100],
-                        msg: 'Email must not exceed 100 characters',
-                    },
-                    notNull: {
-                        args: true,
-                        msg: 'Email cannot be null',
-                    },
-                },
                 allowNull: false,
                 unique: true,
             },
