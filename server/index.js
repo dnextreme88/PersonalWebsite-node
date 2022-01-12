@@ -12,6 +12,7 @@ const PaymentMethodService = require('./services/PaymentMethodService');
 const PostService = require('./services/PostService');
 const SellMethodService = require('./services/SellMethodService');
 const SoldItemService = require('./services/SoldItemService');
+const TokenService = require('./services/TokenService');
 const UserService = require('./services/UserService');
 
 module.exports = (config) => {
@@ -29,6 +30,7 @@ module.exports = (config) => {
     app.use(cors(corsOptions));
 
     // Services
+    const tokens = new TokenService(log);
     const users = new UserService(log);
 
     // -- Archive
@@ -105,6 +107,7 @@ module.exports = (config) => {
         posts,
         sellMethods,
         soldItems,
+        tokens,
         users,
     }));
 

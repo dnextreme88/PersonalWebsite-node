@@ -22,6 +22,15 @@ class SellMethodService {
         return sellMethod;
     }
 
+    async getBySoldItemId(soldItemId) {
+        const sellMethod = await db.SellMethod.findOne({
+            where: { soldItemId },
+            include: { model: await db.SoldItem, as: 'soldItem' },
+        });
+
+        return sellMethod;
+    }
+
     async createSellMethod(body) {
         const values = {
             method: body.method,

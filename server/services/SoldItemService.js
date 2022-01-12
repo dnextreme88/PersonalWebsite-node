@@ -178,7 +178,7 @@ class SoldItemService {
         return newSoldItem;
     }
 
-    async updateSoldItem(id, body) {
+    async updateSoldItem(id, body, paymentMethodBody, sellMethodBody) {
         const soldItem = await db.SoldItem.findByPk(id);
         const values = {
             name: body.name ? body.name : soldItem.name,
@@ -194,7 +194,19 @@ class SoldItemService {
             plain: true,
         });
 
-        return updatedSoldItem[1].dataValues;
+        const paymentMethod = await paymentMethods.getBySoldItemId(id);
+        const updatedPaymentMethod = await paymentMethods.updatePaymentMethod(paymentMethod.id, paymentMethodBody);
+
+        const sellMethod = await sellMethods.getBySoldItemId(id);
+        const updatedSellMethod = await sellMethods.updateSellMethod(sellMethod.id, sellMethodBody);
+
+        const newSoldItem = {
+            ...updatedSoldItem[1].dataValues,
+            PaymentMethod: updatedPaymentMethod,
+            SellMethod: updatedSellMethod,
+        };
+
+        return newSoldItem;
     }
 
     async deleteSoldItem(id) {

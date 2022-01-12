@@ -6,7 +6,7 @@ const Helpers = require('../lib/Helpers');
 const router = express.Router();
 
 module.exports = (params) => {
-    const { users } = params;
+    const { tokens, users } = params;
     const api = new ApiResponse();
     const helpers = new Helpers();
 
@@ -15,6 +15,26 @@ module.exports = (params) => {
             const allUsers = await users.getAll();
 
             return response.json(api.success(allUsers));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
+    router.get('/:userId/login/latest', async (request, response, next) => {
+        try {
+            const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.userId);
+            if (checkIfIdIsInt.error === true) {
+                return response.status(500).json(api.error(checkIfIdIsInt.message));
+            }
+
+            const user = await users.getById(request.params.userId);
+            if (!user) {
+                return response.status(404).json(api.error(helpers.addErrorMessage('userId'), 404));
+            }
+
+            const latestLogins = await tokens.getAllByUserLatestLogins(request.params.userId);
+
+            return response.json(api.success(latestLogins, 'Logins by user (latest 5)'));
         } catch (err) {
             return next(err);
         }
