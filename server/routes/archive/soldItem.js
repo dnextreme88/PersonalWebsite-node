@@ -113,7 +113,7 @@ module.exports = (params) => {
     });
 
     // UPDATE
-    router.post('/:id/update', async (request, response, next) => {
+    router.post('/:id/update', upload.single('imageFile'), async (request, response, next) => {
         const errorList = {};
 
         try {
@@ -127,7 +127,26 @@ module.exports = (params) => {
                 return response.status(404).json(api.error('Sold item not found', 404));
             }
 
-            const updatedSoldItem = await soldItems.updateSoldItem(request.params.id, request.body);
+            const soldItemValues = {
+                name: request.body.name,
+                price: request.body.price,
+                condition: request.body.condition,
+                size: request.body.size,
+                imageLocation: request.file ? directory + request.file.filename : null,
+                dateSold: request.body.dateSold,
+            };
+            const paymentMethodValues = {
+                method: request.body.paymentMethod,
+                remittanceLocation: request.body.paymentLocation,
+            };
+            const sellMethodValues = {
+                method: request.body.sellMethod,
+                location: request.body.sellLocation,
+            };
+
+            const updatedSoldItem = await soldItems.updateSoldItem(
+                request.params.id, soldItemValues, paymentMethodValues, sellMethodValues,
+            );
 
             return response.json(api.success(updatedSoldItem, 'Sold item updated'));
         } catch (err) {
