@@ -1,7 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
+
 const categoryRoutes = require('./blog/category');
+const guideRoutes = require('./guide');
 const paymentMethodRoutes = require('./archive/paymentMethod');
 const postRoutes = require('./blog/post');
 const sellMethodRoutes = require('./archive/sellMethod');
@@ -10,6 +12,7 @@ const userRoutes = require('./user');
 
 module.exports = (params) => {
     // Routes start with api/, which is defined under server/index.js
+    router.use('/guides', guideRoutes(params));
     router.use('/users', userRoutes(params));
 
     // -- Archive

@@ -8,6 +8,7 @@ const httpErrors = require('http-errors');
 const routes = require('./routes');
 
 const CategoryService = require('./services/CategoryService');
+const GuideService = require('./services/GuideService');
 const PaymentMethodService = require('./services/PaymentMethodService');
 const PostService = require('./services/PostService');
 const SellMethodService = require('./services/SellMethodService');
@@ -30,6 +31,7 @@ module.exports = (config) => {
     app.use(cors(corsOptions));
 
     // Services
+    const guides = new GuideService(log);
     const tokens = new TokenService(log);
     const users = new UserService(log);
 
@@ -103,6 +105,7 @@ module.exports = (config) => {
         })(req, res, next);
     }, routes({
         categories,
+        guides,
         paymentMethods,
         posts,
         sellMethods,
