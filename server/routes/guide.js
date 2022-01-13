@@ -65,6 +65,9 @@ module.exports = (params) => {
                 type: request.body.type ? request.body.type.toString() : '',
                 dateCreated: request.body.dateCreated ? request.body.dateCreated : '',
                 dateModified: request.body.dateModified ? request.body.dateModified : '',
+                // dateCreatedOp or dateModifiedOp is either any of the ff: >, >=, =, <, <=
+                dateCreatedOp: request.body.dateCreated ? request.body.dateCreatedOp : '',
+                dateModifiedOp: request.body.dateModified ? request.body.dateModifiedOp : '',
             };
 
             const allGuides = await guides.getAllByFilter(filterParams);

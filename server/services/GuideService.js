@@ -50,11 +50,11 @@ class GuideService {
         }
         if (filterParams.dateCreated) {
             const appender = filterParams.name || filterParams.game || filterParams.platforms || filterParams.type ? andClause : '';
-            query += `${appender} "dateCreated" = '${filterParams.dateCreated}'`;
+            query += `${appender} "dateCreated" ${filterParams.dateCreatedOp} '${filterParams.dateCreated}'`;
         }
         if (filterParams.dateModified) {
             const appender = filterParams.name || filterParams.game || filterParams.platforms || filterParams.type || filterParams.dateCreated ? andClause : '';
-            query += `${appender} "dateModified" = '${filterParams.dateModified}'`;
+            query += `${appender} "dateModified" ${filterParams.dateModifiedOp} '${filterParams.dateModified}'`;
         }
 
         query += ' ORDER BY "Guide"."dateCreated" ASC';
