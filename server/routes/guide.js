@@ -56,6 +56,25 @@ module.exports = (params) => {
         }
     });
 
+    router.post('/filter', async (request, response, next) => {
+        try {
+            const filterParams = {
+                name: request.body.name ? request.body.name : '',
+                game: request.body.game ? request.body.game : '',
+                platforms: request.body.platforms ? request.body.platforms : '',
+                type: request.body.type ? request.body.type.toString() : '',
+                dateCreated: request.body.dateCreated ? request.body.dateCreated : '',
+                dateModified: request.body.dateModified ? request.body.dateModified : '',
+            };
+
+            const allGuides = await guides.getAllByFilter(filterParams);
+
+            return response.json(api.success(allGuides));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     // UPDATE
     router.post('/:id/update', async (request, response, next) => {
         const errorList = {};

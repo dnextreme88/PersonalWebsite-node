@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 const db = require('../models');
 
 class GuideService {
@@ -9,6 +10,57 @@ class GuideService {
         const guides = await db.Guide.findAll({
             order: [['dateCreated', 'ASC']],
         });
+
+        return guides;
+    }
+
+    async getAllByFilter(filterParams) {
+        // Check whether we add a WHERE clause if at least one of the values of the filter parameter is greater than 0
+        const whereClause = Object.values(filterParams).some((value) => value.length > 0) ? 'WHERE' : '';
+        const andClause = ' AND';
+        const guideAttr = await db.Guide.rawAttributes;
+        const guideFields = [];
+
+        Object.keys(guideAttr).forEach((fieldKey) => {
+            const fieldName = ` "Guide"."${fieldKey}"`;
+            guideFields.push(fieldName);
+        });
+
+        let query;
+
+        // Build query
+        query = `SELECT ${guideFields} FROM "Guide" AS "Guide" ${whereClause} `;
+
+        // TODO: To add logic that if name or game inputs contain a single quote,
+        // it must add another single quote to prevent errors in query
+        if (filterParams.name) {
+            query += `"name" ILIKE '%${filterParams.name}%'`;
+        }
+        if (filterParams.game) {
+            const appender = filterParams.name ? andClause : '';
+            query += `${appender} "game" ILIKE '%${filterParams.game}%'`;
+        }
+        if (filterParams.platforms) {
+            const appender = filterParams.name || filterParams.game ? andClause : '';
+            query += `${appender} "platforms" LIKE '%${filterParams.platforms}%'`;
+        }
+        if (filterParams.type) {
+            const appender = filterParams.name || filterParams.game || filterParams.platforms ? andClause : '';
+            query += `${appender} "type" = '${filterParams.type}'`;
+        }
+        if (filterParams.dateCreated) {
+            const appender = filterParams.name || filterParams.game || filterParams.platforms || filterParams.type ? andClause : '';
+            query += `${appender} "dateCreated" = '${filterParams.dateCreated}'`;
+        }
+        if (filterParams.dateModified) {
+            const appender = filterParams.name || filterParams.game || filterParams.platforms || filterParams.type || filterParams.dateCreated ? andClause : '';
+            query += `${appender} "dateModified" = '${filterParams.dateModified}'`;
+        }
+
+        query += ' ORDER BY "Guide"."dateCreated" ASC';
+
+        // Run query
+        const guides = await db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT });
 
         return guides;
     }
