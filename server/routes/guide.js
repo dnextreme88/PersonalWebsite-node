@@ -58,11 +58,12 @@ module.exports = (params) => {
 
     router.post('/filter', async (request, response, next) => {
         try {
+            // Replace single quotes with double single quotes - specific for PostgreSQL
             const filterParams = {
-                name: request.body.name ? request.body.name : '',
-                game: request.body.game ? request.body.game : '',
+                name: request.body.name ? request.body.name.replaceAll('\'', '\'\'') : '',
+                game: request.body.game ? request.body.game.replaceAll('\'', '\'\'') : '',
                 platforms: request.body.platforms ? request.body.platforms : '',
-                type: request.body.type ? request.body.type.toString() : '',
+                type: request.body.type ? request.body.type : '',
                 dateCreated: request.body.dateCreated ? request.body.dateCreated : '',
                 dateModified: request.body.dateModified ? request.body.dateModified : '',
                 // dateCreatedOp or dateModifiedOp is either any of the ff: >, >=, =, <, <=

@@ -31,8 +31,6 @@ class GuideService {
         // Build query
         query = `SELECT ${guideFields} FROM "Guide" AS "Guide" ${whereClause} `;
 
-        // TODO: To add logic that if name or game inputs contain a single quote,
-        // it must add another single quote to prevent errors in query
         if (filterParams.name) {
             query += `"name" ILIKE '%${filterParams.name}%'`;
         }
