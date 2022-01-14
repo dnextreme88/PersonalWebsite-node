@@ -22,6 +22,12 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         game: {
             type: SequelizeDataTypes.STRING(254),
             allowNull: true,
+            validate: {
+                len: {
+                    args: [0, 254],
+                    msg: 'Game must not exceed 254 characters',
+                },
+            },
         },
         platforms: {
             type: SequelizeDataTypes.STRING(254),
@@ -46,10 +52,22 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         dateCreated: {
             type: SequelizeDataTypes.STRING(254),
             allowNull: true,
+            validate: {
+                isDate: {
+                    args: true,
+                    msg: 'Date created must be a date string',
+                },
+            },
         },
         dateModified: {
             type: SequelizeDataTypes.STRING(254),
             allowNull: true,
+            validate: {
+                isDate: {
+                    args: true,
+                    msg: 'Date modified must be a date string',
+                },
+            },
         },
         createdAt: {
             type: SequelizeDataTypes.DATE,
@@ -61,6 +79,14 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         },
     }, {
         freezeTableName: true,
+        // Model-wide validations
+        validate: {
+            isDateModifiedLessThanDateCreated() {
+                if (this.dateModified < this.dateCreated) {
+                    throw new Error('Date modified cannot be less than date created');
+                }
+            },
+        },
     });
 
     return GUIDE;
