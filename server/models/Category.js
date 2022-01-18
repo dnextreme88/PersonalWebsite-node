@@ -8,6 +8,7 @@ module.exports = (sequelize, SequelizeDataTypes) => {
         name: {
             type: SequelizeDataTypes.STRING(50),
             allowNull: false,
+            unique: { msg: 'Name is already taken' },
             validate: {
                 len: {
                     args: [0, 50],
