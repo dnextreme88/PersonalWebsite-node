@@ -69,6 +69,10 @@ module.exports = (sequelize, SequelizeDataTypes) => {
             type: SequelizeDataTypes.TEXT,
             allowNull: true,
         },
+        notes: {
+            type: SequelizeDataTypes.TEXT,
+            allowNull: true,
+        },
         dateSold: {
             type: SequelizeDataTypes.STRING(254),
             allowNull: true,
