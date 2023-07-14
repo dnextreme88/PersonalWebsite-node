@@ -74,7 +74,7 @@ module.exports = (sequelize, SequelizeDataTypes) => {
             allowNull: true,
         },
         dateSold: {
-            type: SequelizeDataTypes.STRING(254),
+            type: SequelizeDataTypes.STRING(15),
             allowNull: true,
             validate: {
                 isDate: {
