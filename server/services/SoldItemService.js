@@ -18,7 +18,7 @@ class SoldItemService {
                 { model: await db.PaymentMethod },
                 { model: await db.SellMethod },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['dateSold', 'ASC']],
         });
 
         return soldItems;
@@ -89,7 +89,7 @@ class SoldItemService {
             query += `${appender} "SellMethod"."method" = '${filterParams.sellMethod}'`;
         }
 
-        query += ' ORDER BY "SoldItem"."createdAt" ASC';
+        query += ' ORDER BY "SoldItem"."dateSold" ASC';
 
         // Run query
         const soldItemsArrOfObjs = await db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT });
