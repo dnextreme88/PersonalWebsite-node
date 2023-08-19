@@ -18,7 +18,7 @@ class SoldItemService {
                 { model: await db.PaymentMethod },
                 { model: await db.SellMethod },
             ],
-            order: [['createdAt', 'ASC']],
+            order: [['dateSold', 'ASC']],
         });
 
         return soldItems;
@@ -89,7 +89,7 @@ class SoldItemService {
             query += `${appender} "SellMethod"."method" = '${filterParams.sellMethod}'`;
         }
 
-        query += ' ORDER BY "SoldItem"."createdAt" ASC';
+        query += ' ORDER BY "SoldItem"."dateSold" ASC';
 
         // Run query
         const soldItemsArrOfObjs = await db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT });
@@ -156,6 +156,7 @@ class SoldItemService {
             condition: body.condition,
             size: body.size,
             imageLocation: body.imageLocation,
+            notes: body.notes,
             // There's a bug when replacing dateSold input in SoldItem.js using set()
             dateSold: body.dateSold.replace(/\//g, '-'),
         };
@@ -186,6 +187,7 @@ class SoldItemService {
             condition: body.condition ? body.condition : soldItem.condition,
             size: body.size ? body.size : soldItem.size,
             imageLocation: body.imageLocation ? body.imageLocation : soldItem.imageLocation,
+            notes: body.notes ? body.notes : soldItem.notes,
             dateSold: body.dateSold ? body.dateSold.replace(/\//g, '-') : soldItem.dateSold,
         };
         const updatedSoldItem = await db.SoldItem.update(values, {

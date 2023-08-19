@@ -64,6 +64,7 @@ module.exports = (params) => {
                 condition: request.body.condition,
                 size: request.body.size,
                 imageLocation: request.file ? directory + request.file.filename : null,
+                notes: request.body.notes && request.body.notes.trim().length > 0 ? request.body.notes.trim() : null,
                 dateSold: request.body.dateSold,
             };
             const paymentMethodValues = {
@@ -133,6 +134,7 @@ module.exports = (params) => {
                 condition: request.body.condition,
                 size: request.body.size,
                 imageLocation: request.file ? directory + request.file.filename : null,
+                notes: request.body.notes && request.body.notes.trim().length > 0 ? request.body.notes.trim() : null,
                 dateSold: request.body.dateSold,
             };
             const paymentMethodValues = {

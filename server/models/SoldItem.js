@@ -55,10 +55,6 @@ module.exports = (sequelize, SequelizeDataTypes) => {
             type: SequelizeDataTypes.STRING(15),
             allowNull: true,
             validate: {
-                isIn: {
-                    args: [['S', 'M', 'L', 'XL', 'XXL', 'N/A']],
-                    msg: 'Size must either be S, M, L, XL, XXL, or N/A',
-                },
                 len: {
                     args: [0, 15],
                     msg: 'Size must not exceed 15 characters',
@@ -69,8 +65,12 @@ module.exports = (sequelize, SequelizeDataTypes) => {
             type: SequelizeDataTypes.TEXT,
             allowNull: true,
         },
+        notes: {
+            type: SequelizeDataTypes.TEXT,
+            allowNull: true,
+        },
         dateSold: {
-            type: SequelizeDataTypes.STRING(254),
+            type: SequelizeDataTypes.STRING(15),
             allowNull: true,
             validate: {
                 isDate: {
