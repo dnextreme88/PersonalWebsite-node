@@ -36,6 +36,26 @@ module.exports = (params) => {
         }
     });
 
+    router.get('/type/:type/graph', async (request, response, next) => {
+        try {
+            const { type } = request.params;
+
+            const allSoldItemsConditions = await soldItems.getAllCountAndSumByCondition(type);
+            const allSoldItemsSizes = await soldItems.getAllCountAndSumBySize(type);
+            const allSoldItemsYears = await soldItems.getAllCountAndSumByYear(type);
+            const allSoldItemsMonths = await soldItems.getAllCountAndSumByMonth(type);
+
+            return response.json(api.success({
+                conditions: allSoldItemsConditions,
+                sizes: allSoldItemsSizes,
+                years: allSoldItemsYears,
+                months: allSoldItemsMonths,
+            }));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     router.get('/:id', async (request, response, next) => {
         try {
             const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.id);

@@ -20,6 +20,22 @@ module.exports = (params) => {
         }
     });
 
+    router.get('/type/:type/graph', async (request, response, next) => {
+        try {
+            const { type } = request.params;
+
+            const allPaymentMethodsName = await paymentMethods.getAllCountAndSumByMethod(type);
+            const allPaymentMethodsLocation = await paymentMethods.getAllCountAndSumByLocation(type);
+
+            return response.json(api.success({
+                methods: allPaymentMethodsName,
+                locations: allPaymentMethodsLocation,
+            }));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     router.get('/:id', async (request, response, next) => {
         try {
             const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.id);
