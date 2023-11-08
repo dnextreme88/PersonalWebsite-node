@@ -1486,6 +1486,41 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Infinitea (SM branch)',
+                soldItemId: 213,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Camp 8 Basketball Court',
+                soldItemId: 214,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'shipment',
+                location: 'J&T Express',
+                soldItemId: 215,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Camp 8 Basketball Court',
+                soldItemId: 216,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Malcolm Square',
+                soldItemId: 217,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

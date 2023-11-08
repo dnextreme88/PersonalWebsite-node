@@ -1486,6 +1486,41 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Infinitea (SM branch)',
+                soldItemId: 213,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Camp 8 Basketball Court',
+                soldItemId: 214,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'remittance',
+                remittanceLocation: 'GCash',
+                soldItemId: 215,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Camp 8 Basketball Court',
+                soldItemId: 216,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Malcolm Square',
+                soldItemId: 217,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
