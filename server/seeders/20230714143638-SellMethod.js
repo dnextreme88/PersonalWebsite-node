@@ -1521,6 +1521,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'shipment',
+                location: 'LBC',
+                soldItemId: 218,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'shipment',
+                location: 'J&T Express',
+                soldItemId: 219,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

@@ -1521,6 +1521,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'remittance',
+                remittanceLocation: 'LBC',
+                soldItemId: 218,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'remittance',
+                remittanceLocation: 'J&T',
+                soldItemId: 219,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            }
         ], {});
     },
 
