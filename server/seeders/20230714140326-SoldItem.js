@@ -1865,7 +1865,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HTC Sensation Z710A Phonhe',
+                name: 'HTC Sensation Z710A Phone',
                 price: 500,
                 condition: 'used',
                 size: 'N/A',
@@ -2048,7 +2048,40 @@ module.exports = {
                 notes: 'Shipped via J&T. Cash-on-delivery. Received payment on 12/10.',
                 dateSold: '2023-11-19',
                 imageLocation: '2023/colorado1-1.jpg',
-            }
+            },
+            {
+                name: 'Puma Ignite Dual Camo Shoes',
+                price: 500,
+                condition: 'used',
+                size: '10.5 US',
+                notes: 'Buyer picked up on 1/3. Payment picked up on 1/8.',
+                dateSold: '2023-12-03',
+                imageLocation: '2023/puma1-1.jpg',
+            },
+            {
+                name: 'Palit GeForce GT 240 Video Card',
+                price: 200,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2023-12-13',
+                imageLocation: '2023/video-card2-1.jpg',
+            },
+            {
+                name: 'Razer Deathstalker Keyboard',
+                price: 800,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2023-12-16',
+                imageLocation: '2023/razer1-1.jpg',
+            },
+            {
+                name: 'Nike Cap',
+                price: 200,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2023-12-30',
+                imageLocation: '2023/nike7-1.jpg',
+            },
         ], {});
     },
 

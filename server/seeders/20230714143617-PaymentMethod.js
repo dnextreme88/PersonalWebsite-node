@@ -1534,7 +1534,35 @@ module.exports = {
                 soldItemId: 219,
                 createdAt: new Date(),
                 updatedAt: new Date(),
-            }
+            },
+            {
+                method: 'dropping area cashout',
+                remittanceLocation: 'Mabini Shopping Center Room 209',
+                soldItemId: 220,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Baguio Centermall',
+                soldItemId: 221,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Pizza Volante (Upper Session Road branch)',
+                soldItemId: 222,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Baguio Centermall',
+                soldItemId: 223,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

@@ -1535,6 +1535,34 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'dropping',
+                location: 'Mabini Shopping Center Room 209',
+                soldItemId: 220,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Baguio Centermall',
+                soldItemId: 221,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Pizza Volante (Upper Session Road branch)',
+                soldItemId: 222,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Baguio Centermall',
+                soldItemId: 223,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
