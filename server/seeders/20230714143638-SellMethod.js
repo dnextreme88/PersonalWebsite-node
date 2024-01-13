@@ -1563,6 +1563,34 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Pizza Volante (Upper Session Road branch)',
+                soldItemId: 224,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'shipment',
+                location: 'J&T Express',
+                soldItemId: 225,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Maharlika Center',
+                soldItemId: 226,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'La Trinidad Jeep Terminal',
+                soldItemId: 227,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

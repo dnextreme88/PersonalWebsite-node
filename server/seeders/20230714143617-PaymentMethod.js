@@ -1563,6 +1563,34 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Pizza Volante (Upper Session Road branch)',
+                soldItemId: 224,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'remittance',
+                remittanceLocation: 'GCash',
+                soldItemId: 225,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Maharlika Center',
+                soldItemId: 226,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'La Trinidad Jeep Terminal',
+                soldItemId: 227,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
