@@ -2115,6 +2115,14 @@ module.exports = {
                 dateSold: '2024-01-13',
                 imageLocation: '2024/apple3-1.jpg',
             },
+            {
+                name: 'Apple iPhone 5 Phone',
+                price: 100,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2024-01-14',
+                imageLocation: '2024/apple4-1.jpg',
+            },
         ], {});
     },
 
