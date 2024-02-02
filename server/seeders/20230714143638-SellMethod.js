@@ -1598,6 +1598,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'SLU',
+                soldItemId: 229,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Baguio Centermall',
+                soldItemId: 230,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'UC',
+                soldItemId: 231,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

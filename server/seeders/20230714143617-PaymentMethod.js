@@ -1598,6 +1598,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'SLU',
+                soldItemId: 229,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Baguio Centermall',
+                soldItemId: 230,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'UC',
+                soldItemId: 231,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

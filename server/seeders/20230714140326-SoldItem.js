@@ -2123,6 +2123,30 @@ module.exports = {
                 dateSold: '2024-01-14',
                 imageLocation: '2024/apple4-1.jpg',
             },
+            {
+                name: 'Nokia 1650 Phone',
+                price: 100,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2024-01-22',
+                imageLocation: '2024/nokia2-1.jpg',
+            },
+            {
+                name: 'Telstra Lite ZTE F327S Phone',
+                price: 250,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2024-01-29',
+                imageLocation: '2024/telstra1-1.jpg',
+            },
+            {
+                name: 'Jedel S-506 Speakers',
+                price: 250,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-02-01',
+                imageLocation: '2024/jedel1-1.jpg',
+            },
         ], {});
     },
 
