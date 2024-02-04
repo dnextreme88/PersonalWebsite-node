@@ -1619,6 +1619,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Rizal Park',
+                soldItemId: 232,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

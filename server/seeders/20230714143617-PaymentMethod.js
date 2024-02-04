@@ -1619,6 +1619,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Rizal Park',
+                soldItemId: 232,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
