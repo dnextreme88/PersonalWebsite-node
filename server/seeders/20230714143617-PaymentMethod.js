@@ -1626,6 +1626,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Armar\'s Place',
+                soldItemId: 233,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

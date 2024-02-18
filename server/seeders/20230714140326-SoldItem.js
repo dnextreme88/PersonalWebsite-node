@@ -2155,6 +2155,15 @@ module.exports = {
                 dateSold: '2024-02-04',
                 imageLocation: '2024/casio1-1.jpg',
             },
+            {
+                name: 'Customized Good Vibes Only Signage',
+                price: 3800,
+                condition: 'new',
+                size: '2.5 feet x 2 feet',
+                notes: 'Initial P3,500 balance originally paid on June 21, 2023 and final P3,500 balance paid on July 6, 2023. Item received on July 12, 2023.',
+                dateSold: '2024-02-18',
+                imageLocation: '2024/customized1-1.jpg',
+            },
         ], {});
     },
 
