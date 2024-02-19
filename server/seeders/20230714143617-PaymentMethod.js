@@ -1633,6 +1633,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'Pizza Volante (Upper Session Road branch)',
+                soldItemId: 234,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

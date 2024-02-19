@@ -1633,6 +1633,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Pizza Volante (Upper Session Road branch)',
+                soldItemId: 106,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
