@@ -1636,7 +1636,7 @@ module.exports = {
             {
                 method: 'meetup',
                 location: 'Pizza Volante (Upper Session Road branch)',
-                soldItemId: 106,
+                soldItemId: 234,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
