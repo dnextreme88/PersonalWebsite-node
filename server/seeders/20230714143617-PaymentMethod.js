@@ -1640,6 +1640,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'KFC (Lower Session Road branch)',
+                soldItemId: 235,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
