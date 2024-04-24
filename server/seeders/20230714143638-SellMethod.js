@@ -1647,6 +1647,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'shipment',
+                location: 'J&T Express',
+                soldItemId: 236,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

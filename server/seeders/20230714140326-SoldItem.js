@@ -2180,6 +2180,14 @@ module.exports = {
                 dateSold: '2024-03-16',
                 imageLocation: '2024/amd1-1.jpg',
             },
+            {
+                name: 'Oreo Photocards',
+                price: 250,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-04-19',
+                imageLocation: '2024/oreo2-1.jpg',
+            },
         ], {});
     },
 
