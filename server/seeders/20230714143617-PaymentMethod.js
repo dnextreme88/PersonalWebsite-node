@@ -1654,6 +1654,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'UC',
+                soldItemId: 237,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'UC',
+                soldItemId: 238,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash on-hand',
+                remittanceLocation: 'UC',
+                soldItemId: 239,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

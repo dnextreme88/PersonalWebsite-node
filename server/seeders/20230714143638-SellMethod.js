@@ -1654,6 +1654,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'UC',
+                soldItemId: 237,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'UC',
+                soldItemId: 238,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'UC',
+                soldItemId: 239,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
