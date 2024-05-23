@@ -2213,6 +2213,30 @@ module.exports = {
                 dateSold: '2024-05-03',
                 imageLocation: '2024/quiksilver3-1.jpg',
             },
+            {
+                name: 'Caterpillar Connect Beanie',
+                price: 250,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-05-05',
+                imageLocation: '2024/caterpillar1-1.jpg',
+            },
+            {
+                name: 'RAKK Alti Gaming Mouse',
+                price: 300,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2024-05-06',
+                imageLocation: '2024/rakk1-1.jpg',
+            },
+            {
+                name: 'Fantech GS301 Trifecta RGB Gaming Speakers',
+                price: 500,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-05-23',
+                imageLocation: '2024/fantech1-1.jpg',
+            },
         ], {});
     },
 

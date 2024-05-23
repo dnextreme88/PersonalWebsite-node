@@ -1675,6 +1675,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'dropping area cashout',
+                remittanceLocation: 'Mabini Shopping Center Room 209',
+                soldItemId: 240,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'UC',
+                soldItemId: 241,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Mcdo (Lower Session Road branch)',
+                soldItemId: 242,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

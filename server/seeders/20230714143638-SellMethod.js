@@ -1675,6 +1675,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'dropping',
+                location: 'Mabini Shopping Center Room 209',
+                soldItemId: 240,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'UC',
+                soldItemId: 241,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Mcdo (Lower Session Road branch)',
+                soldItemId: 242,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
