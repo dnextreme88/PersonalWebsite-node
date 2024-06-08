@@ -1696,6 +1696,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Baguio New City Supermarket',
+                soldItemId: 243,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Baguio General Hospital',
+                soldItemId: 244,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

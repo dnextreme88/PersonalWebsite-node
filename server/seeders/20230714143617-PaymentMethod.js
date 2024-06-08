@@ -1696,6 +1696,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Baguio New City Supermarket',
+                soldItemId: 243,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Baguio General Hospital',
+                soldItemId: 244,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

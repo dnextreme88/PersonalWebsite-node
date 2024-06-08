@@ -2237,6 +2237,22 @@ module.exports = {
                 dateSold: '2024-05-23',
                 imageLocation: '2024/fantech1-1.jpg',
             },
+            {
+                name: 'Surplus Camo Knitted Jacket',
+                price: 200,
+                condition: 'new',
+                size: 'M',
+                dateSold: '2024-06-05',
+                imageLocation: '2024/surplus1-1.jpg',
+            },
+            {
+                name: 'Zara Shirt',
+                price: 200,
+                condition: 'used',
+                size: 'L',
+                dateSold: '2024-06-07',
+                imageLocation: '2024/zara1-1.jpg',
+            },
         ], {});
     },
 
