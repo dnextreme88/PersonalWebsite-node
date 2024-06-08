@@ -32,7 +32,7 @@ module.exports = {
             },
             {
                 method: 'meetup',
-                location: 'Newtown Plaza',
+                location: 'Baguio New City Supermarket',
                 soldItemId: 5,
                 createdAt: new Date(),
                 updatedAt: new Date(),

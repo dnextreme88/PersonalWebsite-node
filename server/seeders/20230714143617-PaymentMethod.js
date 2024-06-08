@@ -32,7 +32,7 @@ module.exports = {
             },
             {
                 method: 'cash on-hand',
-                remittanceLocation: 'Newtown Plaza',
+                remittanceLocation: 'Baguio New City Supermarket',
                 soldItemId: 5,
                 createdAt: new Date(),
                 updatedAt: new Date(),
