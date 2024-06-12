@@ -1710,6 +1710,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Baguio New City Supermarket',
+                soldItemId: 245,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
