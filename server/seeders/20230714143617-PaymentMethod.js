@@ -1717,6 +1717,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Abanao Square',
+                soldItemId: 246,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

@@ -1717,6 +1717,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Abanao Square',
+                soldItemId: 246,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
