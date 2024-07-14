@@ -2295,7 +2295,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'Resong RJ45 Ethernet cable',
+                name: 'Resong RJ45 Ethernet Cable',
                 price: 200,
                 condition: 'new',
                 size: 'N/A',
