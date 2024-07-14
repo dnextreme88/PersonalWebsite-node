@@ -1995,7 +1995,8 @@ module.exports = {
                 size: 'N/A',
                 notes: 'Sold to Marie. P500 initially paid through GCash on 9/18 and P1,000 paid through GCash on 9/24. Received payment on 9/28.',
                 dateSold: '2023-09-17',
-                imageLocation: '2023/microsoft1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'SteelSeries Sensei Ten Mouse',
@@ -2003,7 +2004,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2023-10-03',
-                imageLocation: '2023/steelseries1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Porsche Martini Racing Cap',
@@ -2012,7 +2014,8 @@ module.exports = {
                 size: 'N/A',
                 notes: 'Payment sent through GCash on 10/3. Received payment on 10/23.',
                 dateSold: '2023-10-04',
-                imageLocation: '2023/porsche1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'DVI Cable',
@@ -2021,7 +2024,8 @@ module.exports = {
                 size: 'N/A',
                 notes: 'P200 initially paid through meetup. Paid P100 through GCash on 10/23. Received payment on 10/24.',
                 dateSold: '2023-10-20',
-                imageLocation: '2023/cable2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Auscam DPCU Camouflage Hat',
@@ -2029,7 +2033,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2023-10-23',
-                imageLocation: '2023/hat1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Vans Old School Bearcat Shoes',
@@ -2038,7 +2043,8 @@ module.exports = {
                 size: '11 US',
                 notes: 'Shipped via LBC. Cash-on-pickup. Received payment on 11/20.',
                 dateSold: '2023-11-17',
-                imageLocation: '2023/vans1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Colorado Craig DGrey Boots',
@@ -2047,7 +2053,8 @@ module.exports = {
                 size: '9 US',
                 notes: 'Shipped via J&T. Cash-on-delivery. Received payment on 12/10.',
                 dateSold: '2023-11-19',
-                imageLocation: '2023/colorado1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Puma Ignite Dual Camo Shoes',
@@ -2056,7 +2063,8 @@ module.exports = {
                 size: '10.5 US',
                 notes: 'Buyer picked up on 1/3. Payment picked up on 1/8.',
                 dateSold: '2023-12-03',
-                imageLocation: '2023/puma1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Palit GeForce GT 240 Video Card',
@@ -2064,7 +2072,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2023-12-13',
-                imageLocation: '2023/video-card2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Razer Deathstalker Keyboard',
@@ -2072,7 +2081,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2023-12-16',
-                imageLocation: '2023/razer1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Nike Cap',
@@ -2080,7 +2090,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2023-12-30',
-                imageLocation: '2023/nike7-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Sony Playstation 5 Green Camo Controller',
@@ -2088,7 +2099,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2024-01-01',
-                imageLocation: '2024/sony2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Nokia 6288 Phone',
@@ -2097,7 +2109,8 @@ module.exports = {
                 size: 'N/A',
                 notes: 'Shipped via J&T. Payment sent through GCash on 12/31. Received payment on 1/4.',
                 dateSold: '2024-01-03',
-                imageLocation: '2024/nokia1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Apple iPhone 4 Phone',
@@ -2105,7 +2118,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-01-05',
-                imageLocation: '2024/apple2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Apple iPhone 4S Phone',
@@ -2113,7 +2127,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-01-13',
-                imageLocation: '2024/apple3-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Apple iPhone 5 Phone',
@@ -2121,7 +2136,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-01-14',
-                imageLocation: '2024/apple4-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Nokia 1650 Phone',
@@ -2129,7 +2145,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-01-22',
-                imageLocation: '2024/nokia2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Telstra Lite ZTE F327S Phone',
@@ -2137,7 +2154,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-01-29',
-                imageLocation: '2024/telstra1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Jedel S-506 Speakers',
@@ -2145,7 +2163,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2024-02-01',
-                imageLocation: '2024/jedel1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Casio fx-991MS Scientific Calculator',
@@ -2153,7 +2172,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-02-04',
-                imageLocation: '2024/casio1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Customized Good Vibes Only Signage',
@@ -2162,7 +2182,8 @@ module.exports = {
                 size: '2.5 feet x 2 feet',
                 notes: 'Initial P3,500 balance originally paid on June 21, 2023 and final P3,500 balance paid on July 6, 2023. Item received on July 12, 2023.',
                 dateSold: '2024-02-18',
-                imageLocation: '2024/customized1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Lileng-301 Dancing Water Speakers',
@@ -2170,7 +2191,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-02-19',
-                imageLocation: '2024/lileng1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'AMD AM4 Stock Cooler Fan',
@@ -2178,7 +2200,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2024-03-16',
-                imageLocation: '2024/amd1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Oreo Photocards',
@@ -2187,7 +2210,8 @@ module.exports = {
                 size: 'N/A',
                 notes: 'Shipped via J&T. Payment sent through GCash on 4/18. Received payment on 4/19.',
                 dateSold: '2024-04-19',
-                imageLocation: '2024/oreo2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Billabong Shorts',
@@ -2195,7 +2219,8 @@ module.exports = {
                 condition: 'new',
                 size: '34 or 36',
                 dateSold: '2024-05-03',
-                imageLocation: '2024/billabong3-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Quiksilver Shorts',
@@ -2203,7 +2228,8 @@ module.exports = {
                 condition: 'new',
                 size: '34 or 36',
                 dateSold: '2024-05-03',
-                imageLocation: '2024/quiksilver2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Quiksilver Shorts',
@@ -2211,7 +2237,8 @@ module.exports = {
                 condition: 'new',
                 size: '34',
                 dateSold: '2024-05-03',
-                imageLocation: '2024/quiksilver3-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Caterpillar Connect Beanie',
@@ -2219,7 +2246,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2024-05-05',
-                imageLocation: '2024/caterpillar1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'RAKK Alti Gaming Mouse',
@@ -2227,7 +2255,8 @@ module.exports = {
                 condition: 'used',
                 size: 'N/A',
                 dateSold: '2024-05-06',
-                imageLocation: '2024/rakk1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Fantech GS301 Trifecta RGB Gaming Speakers',
@@ -2235,7 +2264,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2024-05-23',
-                imageLocation: '2024/fantech1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Surplus Camo Knitted Jacket',
@@ -2243,7 +2273,8 @@ module.exports = {
                 condition: 'new',
                 size: 'M',
                 dateSold: '2024-06-05',
-                imageLocation: '2024/surplus1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Zara Shirt',
@@ -2251,7 +2282,8 @@ module.exports = {
                 condition: 'used',
                 size: 'L',
                 dateSold: '2024-06-07',
-                imageLocation: '2024/zara1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'NZXT F120 Non-RGB Stock Fan',
@@ -2259,7 +2291,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2024-06-10',
-                imageLocation: '2024/nzxt1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Resong RJ45 Ethernet cable',
@@ -2267,7 +2300,8 @@ module.exports = {
                 condition: 'new',
                 size: 'N/A',
                 dateSold: '2024-06-22',
-                imageLocation: '2024/resong1-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Under Armour Shirt',
@@ -2275,7 +2309,8 @@ module.exports = {
                 condition: 'new',
                 size: 'XL',
                 dateSold: '2024-07-08',
-                imageLocation: '2024/under-armour2-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Under Armour Shirt',
@@ -2283,7 +2318,8 @@ module.exports = {
                 condition: 'new',
                 size: 'XL',
                 dateSold: '2024-07-09',
-                imageLocation: '2024/under-armour3-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
             {
                 name: 'Under Armour Shirt',
@@ -2291,7 +2327,8 @@ module.exports = {
                 condition: 'new',
                 size: 'L',
                 dateSold: '2024-07-12',
-                imageLocation: '2024/under-armour4-1.jpg',
+                createdAt: new Date(),
+                updatedAt: new Date(),
             },
         ], {});
     },
