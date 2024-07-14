@@ -1724,6 +1724,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Tiong San (Harrison Road branch)',
+                soldItemId: 247,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'UB',
+                soldItemId: 248,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Foam Coffee',
+                soldItemId: 249,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
