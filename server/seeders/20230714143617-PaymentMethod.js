@@ -1745,6 +1745,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'remittance',
+                remittanceLocation: 'GCash',
+                soldItemId: 250,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: '7-11 (Trancoville branch)',
+                soldItemId: 251,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: '7-11 (Trancoville branch)',
+                soldItemId: 252,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

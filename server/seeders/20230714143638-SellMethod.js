@@ -1745,6 +1745,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Camp 8',
+                soldItemId: 250,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: '7-11 (Trancoville branch)',
+                soldItemId: 251,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: '7-11 (Trancoville branch)',
+                soldItemId: 252,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
