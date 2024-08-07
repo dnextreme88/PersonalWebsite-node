@@ -1043,7 +1043,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'Adidas Shirt',
+                name: 'Adidas V-Neck',
                 price: 200,
                 condition: 'new',
                 size: 'XXL',
@@ -1553,7 +1553,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'American Eagle Outfitters Shirt',
+                name: 'American Eagle Outfitters Polo',
                 price: 150,
                 condition: 'new',
                 size: 'XL',
@@ -1671,7 +1671,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'Bronson Shirt',
+                name: 'Bronson Polo',
                 price: 300,
                 condition: 'new',
                 size: 'XL',
@@ -1856,7 +1856,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'Mantaray Shirt',
+                name: 'Mantaray Sweatshirt',
                 price: 100,
                 condition: 'used',
                 size: 'L',
