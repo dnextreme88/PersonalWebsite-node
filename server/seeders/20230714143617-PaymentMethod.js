@@ -1766,6 +1766,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Maharlika Center',
+                soldItemId: 253,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

@@ -2358,6 +2358,15 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'AquaFlask 32oz Bottle',
+                price: 250,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-08-08',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
