@@ -1773,6 +1773,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Chowking (Abanao Square branch)',
+                soldItemId: 254,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

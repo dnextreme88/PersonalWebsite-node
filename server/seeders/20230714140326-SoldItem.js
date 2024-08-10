@@ -2367,6 +2367,15 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'Adidas Fluidflow 2.0 Shoes',
+                price: 200,
+                condition: 'used',
+                size: '12 US',
+                dateSold: '2024-08-10',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

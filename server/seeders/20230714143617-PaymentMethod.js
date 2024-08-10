@@ -1773,6 +1773,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Chowking (Abanao Square branch)',
+                soldItemId: 254,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
