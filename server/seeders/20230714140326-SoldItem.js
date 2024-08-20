@@ -2376,6 +2376,15 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'RAKK Ilis Outemi Blue Keyboard',
+                price: 900,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-08-20',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

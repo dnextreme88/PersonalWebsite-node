@@ -1780,6 +1780,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Kagitingan Barangay Hall Overpass',
+                soldItemId: 255,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
