@@ -1787,6 +1787,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Malcolm Square',
+                soldItemId: 256,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'meetup',
+                location: 'Jollibee (Prime Hotel branch)',
+                soldItemId: 257,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

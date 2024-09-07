@@ -1787,6 +1787,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'remittance',
+                remittanceLocation: 'GCash',
+                soldItemId: 256,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Jollibee (Prime Hotel branch)',
+                soldItemId: 257,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

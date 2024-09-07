@@ -2385,6 +2385,24 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'Tylex RGB Wide Gaming Mousepad',
+                price: 350,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2024-08-31',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Standard Terminator STF-9 Fan',
+                price: 500,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-09-04',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
