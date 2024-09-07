@@ -2390,6 +2390,7 @@ module.exports = {
                 price: 350,
                 condition: 'used',
                 size: 'N/A',
+                notes: 'Payment sent through GCash on 8/31. Received payment on 9/2.',
                 dateSold: '2024-08-31',
                 createdAt: new Date(),
                 updatedAt: new Date(),
