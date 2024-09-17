@@ -1801,6 +1801,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'meetup',
+                location: 'Tiong San (Harrison Road branch)',
+                soldItemId: 258,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'dropping',
+                location: 'Buyer\'s dropping area',
+                soldItemId: 259,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'dropping',
+                location: 'Buyer\'s dropping area',
+                soldItemId: 260,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
