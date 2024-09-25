@@ -2436,6 +2436,24 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'Sorel Caribou Winter Boots',
+                price: 200,
+                condition: 'used',
+                size: '10 US or 11 US',
+                dateSold: '2024-09-23',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Rudy Project Sunglasses',
+                price: 150,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2024-09-25',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

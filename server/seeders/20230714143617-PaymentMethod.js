@@ -1822,6 +1822,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Abanao Square',
+                soldItemId: 261,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Baguio New City Supermarket',
+                soldItemId: 262,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
