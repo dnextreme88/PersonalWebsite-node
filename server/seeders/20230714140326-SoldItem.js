@@ -2379,7 +2379,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'RAKK Ilis Outemi Blue Keyboard',
+                name: 'RAKK Ilis Outemu Blue Keyboard',
                 price: 900,
                 condition: 'new',
                 size: 'N/A',
