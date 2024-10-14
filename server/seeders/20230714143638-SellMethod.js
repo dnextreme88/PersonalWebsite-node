@@ -1836,6 +1836,20 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                location: 'Malcolm Square',
+                soldItemId: 263,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'cash-on-hand',
+                location: 'Hidden Secret Cafe',
+                soldItemId: 264,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

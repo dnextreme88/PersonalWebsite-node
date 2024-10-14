@@ -2454,6 +2454,24 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'PwC Mini Bluetooth / USB Speakers',
+                price: 250,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-10-14',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Pleno Massage Gun',
+                price: 200,
+                condition: 'new',
+                size: 'N/A',
+                dateSold: '2024-10-14',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
