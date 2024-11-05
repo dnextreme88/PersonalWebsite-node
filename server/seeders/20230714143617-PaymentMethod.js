@@ -1850,6 +1850,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Hotel Veniz (Session Road branch)',
+                soldItemId: 265,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

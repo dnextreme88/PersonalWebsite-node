@@ -2473,6 +2473,15 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'HyperX Cloud II Headset',
+                price: 300,
+                condition: 'used',
+                size: 'N/A',
+                dateSold: '2024-11-05',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
