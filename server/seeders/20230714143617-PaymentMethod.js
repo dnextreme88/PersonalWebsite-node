@@ -1857,6 +1857,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'cash-on-hand',
+                remittanceLocation: 'Tiong San (Harrison Road branch)',
+                soldItemId: 266,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

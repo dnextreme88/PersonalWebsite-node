@@ -2482,6 +2482,15 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'Cotton On Pants',
+                price: 250,
+                condition: 'new',
+                size: '34',
+                dateSold: '2024-11-25',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
