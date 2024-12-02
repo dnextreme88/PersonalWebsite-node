@@ -1864,6 +1864,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'dropping',
+                location: 'Mabini Shopping Center Room 209',
+                soldItemId: 267,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

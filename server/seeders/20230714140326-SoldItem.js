@@ -2491,6 +2491,16 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'Cordillera History and Festivals Book',
+                price: 100,
+                condition: 'new',
+                size: 'N/A',
+                notes: 'Buyer picked up on on 12/1. Payment sent through GCash on 11/28. Received payment on 12/2.',
+                dateSold: '2024-11-29',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
