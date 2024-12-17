@@ -734,7 +734,7 @@ module.exports = {
                 price: 100,
                 condition: 'new',
                 size: 'M',
-                notes: 'Buyer picked up on 5/22. Payment picked up on 5/22.',
+                notes: 'Buyer picked up on 5/22. Payment picked up on 5/24.',
                 dateSold: '2019-05-22',
                 createdAt: new Date(),
                 updatedAt: new Date(),
