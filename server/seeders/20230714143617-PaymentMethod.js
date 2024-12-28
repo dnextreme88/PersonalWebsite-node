@@ -1871,6 +1871,13 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'dropping area cashout',
+                remittanceLocation: 'Mabini Shopping Center Room 209',
+                soldItemId: 268,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

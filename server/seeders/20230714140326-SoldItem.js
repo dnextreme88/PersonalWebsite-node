@@ -2501,6 +2501,16 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'Programs and Services for MSMEs Book',
+                price: 100,
+                condition: 'new',
+                size: 'N/A',
+                notes: 'Buyer picked up on 12/17. Payment picked up on 12/28.',
+                dateSold: '2024-12-16',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
