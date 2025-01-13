@@ -2511,6 +2511,37 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                name: 'Umbro Shorts',
+                price: 250,
+                condition: 'new',
+                size: 'L',
+                notes: 'Shipped via J&T. Payment sent through GCash on 1/5. Received payment on 1/9.',
+                dateSold: '2025-01-06',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Lamborghini Murcielago LP670-4 SV Toy',
+                price: 250,
+                condition: 'new',
+                size: '1/24 scale',
+                notes: 'Buyer picked up on 1/7. Payment picked up on 1/13.',
+                dateSold: '2025-01-06',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            // TODO: TO UPDATE NOTES ON WHEN BUYER PICKED UP ITEM
+            {
+                name: 'Ferrari F355 Berlinetta Toy',
+                price: 300,
+                condition: 'new',
+                size: '1/24 scale',
+                notes: 'Buyer picked up on 1/?. Payment sent through GCash on 1/7. Received payment on 1/13.',
+                dateSold: '2025-01-08',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

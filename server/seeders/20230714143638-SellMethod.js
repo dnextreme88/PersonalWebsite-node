@@ -1878,6 +1878,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'shipment',
+                location: 'J&T Express',
+                soldItemId: 269,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'dropping',
+                location: 'Mabini Shopping Center Room 209',
+                soldItemId: 270,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'dropping',
+                location: 'Mabini Shopping Center Room 209',
+                soldItemId: 271,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 

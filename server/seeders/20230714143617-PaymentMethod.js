@@ -1878,6 +1878,27 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                method: 'remittance',
+                remittanceLocation: 'GCash',
+                soldItemId: 269,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'remittance',
+                remittanceLocation: 'GCash',
+                soldItemId: 270,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                method: 'remittance',
+                remittanceLocation: 'GCash',
+                soldItemId: 271,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ], {});
     },
 
