@@ -1,5 +1,7 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable no-invalid-this */
 /* eslint-disable no-restricted-syntax */
+const { Op, Sequelize } = require('sequelize');
 const db = require('../models');
 const PaymentMethodService = require('./PaymentMethodService');
 const SellMethodService = require('./SellMethodService');
@@ -22,6 +24,100 @@ class SoldItemService {
         });
 
         return soldItems;
+    }
+
+    async getAllCountAndSumByCondition(type) {
+        const conditions = [];
+
+        await db.SoldItem.findAll({
+            attributes: [
+                [Sequelize.fn('DISTINCT', Sequelize.col('condition')), 'condition'],
+                [Sequelize.fn('COUNT', Sequelize.col('id')), 'count'],
+                [Sequelize.fn('SUM', Sequelize.col('price')), 'sum'],
+            ],
+            group: 'condition',
+        }).then((result) => {
+            result.forEach((soldItem) => {
+                if (type === 'count') {
+                    conditions.push({ condition: soldItem.dataValues.condition, count: soldItem.dataValues.count });
+                } else if (type === 'sum') {
+                    conditions.push({ condition: soldItem.dataValues.condition, sum: soldItem.dataValues.sum });
+                }
+            });
+        });
+
+        return conditions;
+    }
+
+    async getAllCountAndSumBySize(type) {
+        const sizes = [];
+
+        await db.SoldItem.findAll({
+            attributes: [
+                [Sequelize.fn('DISTINCT', Sequelize.col('size')), 'size'],
+                [Sequelize.fn('COUNT', Sequelize.col('id')), 'count'],
+                [Sequelize.fn('SUM', Sequelize.col('price')), 'sum'],
+            ],
+            group: 'size',
+        }).then((result) => {
+            result.forEach((soldItem) => {
+                if (type === 'count') {
+                    sizes.push({ size: soldItem.dataValues.size, count: soldItem.dataValues.count });
+                } else if (type === 'sum') {
+                    sizes.push({ size: soldItem.dataValues.size, sum: soldItem.dataValues.sum });
+                }
+            });
+        });
+
+        return sizes;
+    }
+
+    async getAllCountAndSumByYear(type) {
+        const currentYear = new Date().getFullYear();
+        const years = [];
+
+        for (let year = 2014; year <= currentYear; year++) {
+            if (year <= currentYear) {
+                await db.SoldItem.findAll({
+                    where: { dateSold: { [Op.like]: `${year}-%` } },
+                    attributes: [
+                        [Sequelize.fn('COUNT', Sequelize.col('id')), 'count'],
+                        [Sequelize.fn('SUM', Sequelize.col('price')), 'sum'],
+                    ],
+                }).then((soldItem) => {
+                    if (type === 'count') {
+                        years.push({ year, count: soldItem[0].dataValues.count });
+                    } else if (type === 'sum') {
+                        years.push({ year, sum: soldItem[0].dataValues.sum });
+                    }
+                });
+            }
+        }
+
+        return years;
+    }
+
+    async getAllCountAndSumByMonth(type) {
+        const monthsTwoDigits = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        const months = [];
+
+        for (let i = 0; i < monthsTwoDigits.length; i++) {
+            await db.SoldItem.findAll({
+                where: { dateSold: { [Op.like]: `%-${monthsTwoDigits[i]}-%` } },
+                attributes: [
+                    [Sequelize.fn('COUNT', Sequelize.col('id')), 'count'],
+                    [Sequelize.fn('SUM', Sequelize.col('price')), 'sum'],
+                ],
+            }).then((soldItem) => {
+                if (type === 'count') {
+                    months.push({ month: monthsTwoDigits[i], count: soldItem[0].dataValues.count });
+                } else if (type === 'sum') {
+                    months.push({ month: monthsTwoDigits[i], sum: soldItem[0].dataValues.sum });
+                }
+            });
+        }
+
+        return months;
     }
 
     async getAllByFilter(filterParams) {

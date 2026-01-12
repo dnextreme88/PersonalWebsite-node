@@ -20,6 +20,22 @@ module.exports = (params) => {
         }
     });
 
+    router.get('/type/:type/graph', async (request, response, next) => {
+        try {
+            const { type } = request.params;
+
+            const allSellMethodsName = await sellMethods.getAllCountAndSumByMethod(type);
+            const allSellMethodsLocation = await sellMethods.getAllCountAndSumByLocation(type);
+
+            return response.json(api.success({
+                methods: allSellMethodsName,
+                locations: allSellMethodsLocation,
+            }));
+        } catch (err) {
+            return next(err);
+        }
+    });
+
     router.get('/:id', async (request, response, next) => {
         try {
             const checkIfIdIsInt = helpers.checkIfValidPositiveInteger(request.params.id);
